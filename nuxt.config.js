@@ -1,3 +1,4 @@
+import bodyParser from 'body-parser'
 
 export default {
   /*
@@ -25,6 +26,11 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  serverMiddleware: [
+    bodyParser.json(),
+    '~/api/index.js'
+  ],
+  watch: ['~/api/*/**.js'],
   /*
   ** Global CSS
   */
