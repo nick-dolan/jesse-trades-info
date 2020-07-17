@@ -24,9 +24,16 @@ export default {
   computed: {},
   mounted () {
     this.$axios
-      .$post('/api/test-api', {})
+      .$get('/api/candles', {
+        params: {
+          symbol: 'BTCUSDT',
+          exchange: 'Binance',
+          entry_candle_timestamp: 1583231400000,
+          exit_candle_timestamp: 1583681400000
+        }
+      })
       .then((res) => {
-        console.log('ok', res)
+        console.log('Data:', res.data.length)
       })
       .catch(function (error) {
         console.log(error)
