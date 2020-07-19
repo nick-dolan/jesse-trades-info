@@ -1,6 +1,16 @@
 <template>
   <div class="cont">
     <Upload/>
+
+    <h3>Backtest list</h3>
+
+    <div
+      v-for="(item, i) in backtestsFileNames"
+      :key="i">
+      <nuxt-link :to="`/backtest/${item}`">
+        <pre>{{ item }}</pre>
+      </nuxt-link>
+    </div>
   </div>
 </template>
 
@@ -12,6 +22,7 @@
 </style>
 
 <script>
+import { mapState } from 'vuex'
 import Upload from '../components/Upload'
 
 export default {
@@ -19,28 +30,18 @@ export default {
   components: {
     Upload
   },
+  middleware: ['middleware'],
   data () {
     return {
       greeting: 'Hello jesse-trades-info'
     }
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      backtestsFileNames: state => state.backtestsFileNames
+    })
+  },
   mounted () {
-    this.$axios
-      .$get('/api/candles', {
-        params: {
-          symbol: 'BTCUSDT',
-          exchange: 'Binance',
-          entryTimestamp: 1583233200000,
-          exitTimestamp: 1591894800000
-        }
-      })
-      .then((res) => {
-        console.log('Data:', res.data.length)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
   },
   methods: {}
 }
