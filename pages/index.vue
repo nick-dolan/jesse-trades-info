@@ -1,21 +1,24 @@
 <template>
-  <div>
-    {{ greeting }}
+  <div class="cont">
+    <Upload/>
   </div>
 </template>
 
-<style scoped lang="scss">
-  div {
-    font-size: 2em;
-    text-align: center;
+<style lang="scss">
+  .cont {
+    width: 800px;
+    margin: 50px auto;
   }
 </style>
 
 <script>
+import Upload from '../components/Upload'
 
 export default {
   name: 'Home',
-  components: {},
+  components: {
+    Upload
+  },
   data () {
     return {
       greeting: 'Hello jesse-trades-info'
@@ -28,14 +31,14 @@ export default {
         params: {
           symbol: 'BTCUSDT',
           exchange: 'Binance',
-          entry_candle_timestamp: 1583231400000,
-          exit_candle_timestamp: 1583681400000
+          entryTimestamp: 1583233200000,
+          exitTimestamp: 1591894800000
         }
       })
       .then((res) => {
         console.log('Data:', res.data.length)
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error)
       })
   },

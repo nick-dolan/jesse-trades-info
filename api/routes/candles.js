@@ -15,8 +15,8 @@ router.get('/candles', function (req, res) {
   const {
     symbol,
     exchange,
-    entry_candle_timestamp: entryTimestamp,
-    exit_candle_timestamp: exitTimestamp
+    entryTimestamp,
+    exitTimestamp
   } = req.query
 
   pool
