@@ -2,7 +2,7 @@
   <div class="cont">
     <Uploader/>
 
-    <h3>Backtest list</h3>
+    <h1>Uploaded backtests</h1>
 
     <div
       v-for="(item, i) in backtestsFileNames"

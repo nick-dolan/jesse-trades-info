@@ -25,7 +25,7 @@ router.post('/upload', upload.single('backtest'), (req, res, next) => {
     return next(error)
   }
 
-  res.send(file)
+  res.send(path.parse(file.originalname).name)
 })
 
 router.get('/read-file', (req, res, next) => {
