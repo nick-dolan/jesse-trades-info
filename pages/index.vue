@@ -30,13 +30,19 @@ export default {
   components: {
     Upload
   },
+  async asyncData ({ $axios, store }) {
+    await $axios
+      .$get('/api/files-list')
+      .then((result) => {
+        store.commit('SET_BACKTESTS_FILE_NAMES', result)
+      })
+  },
   data () {
     return {
       greeting: 'Hello jesse-trades-info'
     }
   },
-
-  middleware: ['middleware'],
+  // middleware: ['middleware'],
   computed: {
     ...mapState({
       backtestsFileNames: state => state.backtestsFileNames

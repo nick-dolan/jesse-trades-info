@@ -1,4 +1,5 @@
 const fs = require('fs')
+const path = require('path')
 const { Router } = require('express')
 const multer = require('multer')
 
@@ -27,7 +28,7 @@ router.post('/upload', upload.single('backtest'), (req, res, next) => {
   res.send(file)
 })
 
-router.get('/read-file', function (req, res, next) {
+router.get('/read-file', (req, res, next) => {
   const { fileName } = req.query
 
   fs.readFile(`uploads/${fileName}.json`, 'utf8', (err, data) => {
@@ -39,6 +40,18 @@ router.get('/read-file', function (req, res, next) {
 
     res.send(data)
   })
+})
+
+/*
+* Get already uploaded backtests' file names
+* */
+router.get('/files-list', (req, res, next) => {
+  const jsonFiles = fs
+    .readdirSync('uploads/')
+    .filter(el => /\.json$/.test(el))
+    .map(item => path.parse(item).name)
+
+  res.send(jsonFiles)
 })
 
 module.exports = router
