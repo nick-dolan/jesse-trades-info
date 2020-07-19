@@ -1,6 +1,6 @@
 <template>
   <div class="cont">
-    <Upload/>
+    <Uploader/>
 
     <h3>Backtest list</h3>
 
@@ -23,12 +23,12 @@
 
 <script>
 import { mapState } from 'vuex'
-import Upload from '../components/Upload'
+import Uploader from '../components/Uploader'
 
 export default {
   name: 'Home',
   components: {
-    Upload
+    Uploader
   },
   async asyncData ({ $axios, store }) {
     await $axios
