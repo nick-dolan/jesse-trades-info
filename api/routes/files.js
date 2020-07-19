@@ -1,3 +1,4 @@
+const fs = require('fs')
 const { Router } = require('express')
 const multer = require('multer')
 
@@ -24,6 +25,20 @@ router.post('/upload', upload.single('backtest'), (req, res, next) => {
   }
 
   res.send(file)
+})
+
+router.get('/read-file', function (req, res, next) {
+  const { fileName } = req.query
+
+  fs.readFile(`uploads/${fileName}.json`, 'utf8', (err, data) => {
+    if (err) {
+      const error = new Error('Something wrong with file.')
+      error.httpStatusCode = 400
+      return next(error)
+    }
+
+    res.send(data)
+  })
 })
 
 module.exports = router

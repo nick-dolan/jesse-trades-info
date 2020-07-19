@@ -3,10 +3,10 @@ const express = require('express')
 const app = express()
 
 const candles = require('./routes/candles')
-const upload = require('./routes/upload')
+const files = require('./routes/files')
 
 app.use(candles)
-app.use(upload)
+app.use(files)
 
 module.exports = {
   path: '/api',

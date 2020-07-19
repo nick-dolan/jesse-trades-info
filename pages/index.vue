@@ -7,7 +7,7 @@
     <div
       v-for="(item, i) in backtestsFileNames"
       :key="i">
-      <nuxt-link :to="`/backtest/${item}`">
+      <nuxt-link :to="`/trades/${item}`">
         <pre>{{ item }}</pre>
       </nuxt-link>
     </div>
@@ -30,12 +30,13 @@ export default {
   components: {
     Upload
   },
-  middleware: ['middleware'],
   data () {
     return {
       greeting: 'Hello jesse-trades-info'
     }
   },
+
+  middleware: ['middleware'],
   computed: {
     ...mapState({
       backtestsFileNames: state => state.backtestsFileNames
@@ -43,6 +44,14 @@ export default {
   },
   mounted () {
   },
-  methods: {}
+  methods: {},
+  head () {
+    return {
+      title: 'Home',
+      meta: [
+        { hid: 'description', name: 'description', content: 'List of backtests' }
+      ]
+    }
+  }
 }
 </script>
