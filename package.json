@@ -21,6 +21,7 @@
     "multer": "^1.4.2",
     "nuxt": "^2.13.0",
     "nuxt-env": "^0.1.0",
+    "nuxt-svg-loader": "^1.2.0",
     "pg": "^8.3.0"
   },
   "devDependencies": {

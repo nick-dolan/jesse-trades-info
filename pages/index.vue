@@ -1,52 +1,34 @@
 <template>
-  <div class="cont">
+  <section class="container mt-40">
     <Uploader/>
 
-    <h1>Uploaded backtests</h1>
-
-    <div
-      v-for="(item, i) in backtestsFileNames"
-      :key="i">
-      <nuxt-link :to="`/trades/${item}`">
-        <pre>{{ item }}</pre>
-      </nuxt-link>
-    </div>
-  </div>
+    <BacktestsList/>
+  </section>
 </template>
 
 <style lang="scss">
-  .cont {
-    width: 800px;
-    margin: 50px auto;
+  .container {
+    max-width: 800px;
   }
 </style>
 
 <script>
-import { mapState } from 'vuex'
 import Uploader from '../components/Uploader'
+import BacktestsList from '@/components/BacktestsList'
 
 export default {
   name: 'Home',
   components: {
-    Uploader
+    Uploader,
+    BacktestsList
   },
-  async asyncData ({ $axios, store }) {
-    await $axios
-      .$get('/api/files-list')
-      .then((result) => {
-        store.commit('SET_BACKTESTS_FILE_NAMES', result)
-      })
+  async asyncData ({ store }) {
+    await store.dispatch('files/getFilesList')
   },
   data () {
     return {
       greeting: 'Hello jesse-trades-info'
     }
-  },
-  // middleware: ['middleware'],
-  computed: {
-    ...mapState({
-      backtestsFileNames: state => state.backtestsFileNames
-    })
   },
   mounted () {
   },

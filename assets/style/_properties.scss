@@ -1,8 +1,9 @@
 :root {
+  --color-primary: #5a67d8;
   --sell-color: rgba(247, 30, 50, 0.2);
   --buy-color: rgba(0, 193, 0, 0.2);
+  --font-size: 16px;
 }
-
 [data-theme="dark"] {
   --bg-color: #000;
   --bg-secondary-color: #131316;

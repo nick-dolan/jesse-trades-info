@@ -77,7 +77,8 @@ export default {
         { key: 'DB_HOST', name: '127.0.0.1' },
         { key: 'DB_PORT', name: '5432' }
       ]
-    }]
+    }],
+    'nuxt-svg-loader'
   ],
   /*
   ** Axios module configuration
@@ -89,7 +90,7 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
-    extend (config, ctx) {
+    extend (config) {
       config.node = {
         fs: 'empty'
       }

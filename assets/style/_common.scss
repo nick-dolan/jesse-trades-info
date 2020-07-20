@@ -1,7 +1,8 @@
-body {}
-
+body {
+}
 svg {
   fill: currentColor;
+  transition: color 100ms linear;
 }
 pre {
   font-size: 13px;
@@ -9,4 +10,9 @@ pre {
 }
 img[alt] {
   font-size: 10px;
+}
+td,
+th {
+  vertical-align: middle;
+  padding: 0.8rem 0.4rem;
 }

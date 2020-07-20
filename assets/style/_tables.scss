@@ -3,11 +3,10 @@
   overflow-x: auto;
   white-space: nowrap;
 }
-
 .table.table-hover tbody tr:hover {
+  transition: background 100ms linear;
   background: var(--bg-secondary-color);
 }
-
 .table-show-more {
   height: 48px;
   display: flex;
@@ -16,11 +15,11 @@
   cursor: pointer;
   color: var(--color-grey);
   border-top: 1px solid var(--color-lightGrey);
+  transition: background 100ms linear;
   &:hover {
     background: var(--bg-secondary-color);
   }
 }
-
 .table.table-info {
   width: auto;
   th, td {

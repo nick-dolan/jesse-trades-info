@@ -45,13 +45,23 @@ router.get('/read-file', (req, res, next) => {
 /*
 * Get already uploaded backtests' file names
 * */
-router.get('/files-list', (req, res, next) => {
+router.get('/files-list', (req, res) => {
   const jsonFiles = fs
     .readdirSync('uploads/')
     .filter(el => /\.json$/.test(el))
     .map(item => path.parse(item).name)
 
   res.send(jsonFiles)
+})
+
+router.delete('/delete-file', (req, res) => {
+  fs.unlink(`uploads/${req.query.file_name}.json`, (err) => {
+    if (err) {
+      res.status(500).json(err)
+    }
+
+    res.send('Backtest removed.')
+  })
 })
 
 module.exports = router
