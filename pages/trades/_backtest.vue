@@ -1,13 +1,15 @@
 <template>
-  <div>
-    {{ $route.params.name }}
-
-    <pre>{{ candles.length }}</pre>
+  <section class="container">
+    <h1 class="text-capitalize">
+      {{ $route.params.backtest }}
+    </h1>
 
     <client-only>
-      <OHLC :ohlc="candles"/>
+      <OHLC :ohlc="candles" class="mb-10"/>
     </client-only>
-  </div>
+
+    <TradesList :trades="trades"/>
+  </section>
 </template>
 
 <style scoped lang="scss">
@@ -16,11 +18,13 @@
 <script>
 
 import OHLC from '@/components/OHLC'
+import TradesList from '@/components/TradesList'
 
 export default {
   name: 'Backtest',
   components: {
-    OHLC
+    OHLC,
+    TradesList
   },
   async asyncData ({ $axios, route }) {
     let trades = []
@@ -45,7 +49,6 @@ export default {
             exchange: trades[0].exchange,
             entryTimestamp: trades[0].opened_at,
             exitTimestamp: trades[trades.length - 1].closed_at
-            // exitTimestamp: 1583234200000
           }
         })
         .then((result) => {
@@ -65,9 +68,6 @@ export default {
     }
   },
   computed: {
-    isClient () {
-      return process.client
-    }
   },
   mounted () {
   },

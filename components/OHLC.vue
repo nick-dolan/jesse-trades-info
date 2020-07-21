@@ -1,10 +1,8 @@
 <!--suppress ES6ModulesDependencies -->
 <template>
-  <div>
-    <div
-      id="chart"
-      ref="chart"/>
-  </div>
+  <div
+    id="chart"
+    ref="chart"/>
 </template>
 
 <style scoped lang="scss">
@@ -26,7 +24,7 @@ export default {
   data () {
     return {
       settings: {
-        width: window.innerWidth,
+        width: 800,
         height: 420,
         layout: {
           backgroundColor: '#131722',
@@ -55,6 +53,8 @@ export default {
   computed: {},
   watch: {},
   mounted () {
+    this.$set(this.settings, 'width', this.$refs.chart.clientWidth)
+
     const chart = LightweightCharts.createChart(this.$refs.chart, this.settings)
 
     const candleSeries = chart.addCandlestickSeries()

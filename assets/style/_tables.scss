@@ -3,6 +3,11 @@
   overflow-x: auto;
   white-space: nowrap;
 }
+.table {
+  th, td {
+    vertical-align: middle;
+  }
+}
 .table.table-hover tbody tr:hover {
   transition: background 100ms linear;
   background: var(--bg-secondary-color);

@@ -52,7 +52,8 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '~/plugins/axios.js'
+    '~/plugins/axios.js',
+    '~/plugins/tooltip.client.js'
   ],
   /*
   ** Auto import components
