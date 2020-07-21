@@ -9,7 +9,7 @@
       accept="application/JSON"
       type="file"
       @change="onFileUpload">
-    Drag and drop a json file here or click
+    Drag and drop a json file or click here
   </label>
 </template>
 
@@ -28,7 +28,7 @@
     background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
     background-size: 6px 1px, 6px 1px, 1px 6px, 1px 6px;
     background-position: left top, right bottom, left bottom, right top;
-      animation: border-dance 1s infinite linear;
+    animation: border-dance 1s infinite linear;
     &:hover, &.is-active {
       background-color: var(--bg-secondary-color);
     }

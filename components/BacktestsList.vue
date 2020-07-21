@@ -2,7 +2,7 @@
   <section class="table-wrapper mb-40">
     <h2>Uploaded backtests</h2>
 
-    <table class="table table-hover">
+    <table v-if="backtestsFileNames.length > 0" class="table table-hover">
       <thead>
         <tr>
           <th>Name</th>
@@ -38,6 +38,10 @@
         </tr>
       </tbody>
     </table>
+
+    <p v-else class="text-grey">
+      There is no uploaded backtests yet.
+    </p>
   </section>
 </template>
 

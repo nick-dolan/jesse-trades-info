@@ -1,20 +1,23 @@
-# Jesse trades info
+# Jesse trades info 
 
-## Build Setup
+Jesse trades info is the additional instrument for Jesse's trading framework that helps to parse JSON backtest files with trades and shows in a convenient way with tables and charts.
 
-```bash
-# install dependencies
-$ npm install
+Firstly you need to set up a database. Rename `.env.example` into `.env` in the root directory with the same credentials as you are using with Jesse. It needed to get candles to draw a chart with trades.
 
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
+```
+DB_HOST='127.0.0.1'
+DB_NAME=jesse_db
+DB_USER=jesse_user
+DB_PASSWORD=jesse_psw
+DB_PORT=5432
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+Then you need to install dependencies and run the local website:
+
+```
+npm install
+npm run build
+npm run start
+```
+
+After a successful start, you can open it at http://localhost:3000/.

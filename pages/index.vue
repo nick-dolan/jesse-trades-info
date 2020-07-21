@@ -1,6 +1,6 @@
 <template>
   <section class="container container-small mt-40">
-    <Uploader/>
+    <Uploader class="mb-40"/>
 
     <BacktestsList/>
   </section>
@@ -23,8 +23,7 @@ export default {
     await store.dispatch('files/getFilesList')
   },
   data () {
-    return {
-    }
+    return {}
   },
   mounted () {
   },
