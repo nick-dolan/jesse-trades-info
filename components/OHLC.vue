@@ -19,6 +19,11 @@ export default {
       type: Array,
       default: () => [],
       required: true
+    },
+    orders: {
+      type: Array,
+      default: () => [],
+      required: true
     }
   },
   data () {
@@ -60,6 +65,20 @@ export default {
     const candleSeries = chart.addCandlestickSeries()
 
     candleSeries.setData(this.ohlc)
+
+    chart.timeScale().fitContent()
+
+    const orders = this.orders.map((i) => {
+      return {
+        time: i.executed_at,
+        position: 'inBar',
+        color: i.side === 'buy' ? '#28bd14' : '#d43939',
+        // shape: i.side === 'buy' ? 'arrowUp' : 'arrowDown',
+        shape: 'circle'
+      }
+    })
+
+    candleSeries.setMarkers(orders)
   },
   methods: {
     renderChart () {

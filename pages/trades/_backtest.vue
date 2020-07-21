@@ -1,14 +1,29 @@
 <template>
   <section class="container">
     <h1 class="text-capitalize">
-      {{ $route.params.backtest }}
+      Backtest:
+      <span class="mono-font font-size-16">
+        {{ $route.params.backtest }}
+      </span>
     </h1>
 
+    <h2>Portfolio</h2>
+
     <client-only>
-      <OHLC :ohlc="candles" class="mb-10"/>
+      <PortfolioChart :trades="trades"/>
     </client-only>
 
-    <TradesList :trades="trades"/>
+    <h2>Trades</h2>
+
+    <client-only>
+      <OHLC
+        :orders="orders"
+        :ohlc="candles"
+        class="mb-10"/>
+    </client-only>
+
+    <TradesList
+      :trades="trades"/>
   </section>
 </template>
 
@@ -19,12 +34,14 @@
 
 import OHLC from '@/components/OHLC'
 import TradesList from '@/components/TradesList'
+import PortfolioChart from '@/components/PortfolioChart'
 
 export default {
   name: 'Backtest',
   components: {
     OHLC,
-    TradesList
+    TradesList,
+    PortfolioChart
   },
   async asyncData ({ $axios, route }) {
     let trades = []
@@ -38,6 +55,13 @@ export default {
       .then((result) => {
         trades = result.trades
       })
+
+    // Get orders to draw them on chart
+    let orders = trades.map((item) => {
+      return [...item.orders]
+    })
+
+    orders = orders.flat()
 
     let candles = []
 
@@ -58,17 +82,18 @@ export default {
 
     return {
       trades,
-      candles
+      candles,
+      orders
     }
   },
   data () {
     return {
+      orders: [],
       candles: [],
       trades: []
     }
   },
-  computed: {
-  },
+  computed: {},
   mounted () {
   },
   methods: {}

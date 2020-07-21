@@ -21,10 +21,11 @@
       <tbody>
         <tr
           v-for="(item, i) in trades"
-          :key="i"
-          class="is-pointer">
+          :key="i">
           <td>
-            <span v-tooltip="{ content: `Strategy: ${item.strategy_name}; Exchange: ${item.exchange}` }">
+            <span
+              v-tooltip="{ content: `Strategy: ${item.strategy_name}; Exchange: ${item.exchange}` }"
+              class="is-pointer">
               {{ item.symbol }}
             </span>
           </td>
@@ -35,7 +36,7 @@
             <small>{{ item.closed_at | parseDate }}</small>
           </td>
           <td>
-            <small>{{ item.holding_period | durationDate }}</small>
+            {{ item.holding_period | durationDate }}
           </td>
           <td>
             <small>{{ item.size | trailingZeros }}</small>
@@ -47,12 +48,16 @@
             <small>{{ item.fee | trailingZeros }}</small>
           </td>
           <td>
-            <small v-tooltip="{ content: `Take profit at: ${$options.filters.trailingZeros(item.take_profit_at)}` }">
+            <small
+              v-tooltip="{ content: `Take profit at: ${$options.filters.trailingZeros(item.take_profit_at)}` }"
+              class="is-pointer">
               {{ item.entry_price | trailingZeros }}
             </small>
           </td>
           <td>
-            <small v-tooltip="{ content: `Stop loss at: ${$options.filters.trailingZeros(item.stop_loss_at)}` }">
+            <small
+              v-tooltip="{ content: `Stop loss at: ${$options.filters.trailingZeros(item.stop_loss_at)}` }"
+              class="is-pointer">
               {{ item.exit_price | trailingZeros }}
             </small>
           </td>

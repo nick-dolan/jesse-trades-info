@@ -1,13 +1,13 @@
 <template>
-  <section class="container mt-40">
+  <section class="container container-home mt-40">
     <Uploader/>
 
     <BacktestsList/>
   </section>
 </template>
 
-<style lang="scss">
-  .container {
+<style scoped lang="scss">
+  .container.container-home {
     max-width: 800px;
   }
 </style>
