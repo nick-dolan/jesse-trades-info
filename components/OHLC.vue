@@ -50,7 +50,9 @@ export default {
           borderColor: 'rgba(197, 203, 206, 0.6)'
         },
         timeScale: {
-          borderColor: 'rgba(197, 203, 206, 0.6)'
+          borderColor: 'rgba(197, 203, 206, 0.6)',
+          timeVisible: true,
+          secondsVisible: false
         }
       }
     }
@@ -70,7 +72,7 @@ export default {
 
     const orders = this.orders.map((i) => {
       return {
-        time: i.executed_at,
+        time: i.executed_at / 1000,
         position: 'inBar',
         color: i.side === 'buy' ? '#28bd14' : '#d43939',
         // shape: i.side === 'buy' ? 'arrowUp' : 'arrowDown',

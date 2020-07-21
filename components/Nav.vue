@@ -6,7 +6,7 @@
           class="brand"
           to="/">
           <img
-            src="jesse-ai-logo.png"
+            src="/jesse-ai-logo.png"
             alt="Logo">
         </nuxt-link>
 

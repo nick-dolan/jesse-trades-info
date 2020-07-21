@@ -52,7 +52,14 @@ router.get('/candles', function (req, res) {
         newFrameMin = 180
       }
 
-      const candles = batchCandleJSON(result.rows, 60, newFrameMin * 60)
+      let candles = batchCandleJSON(result.rows, 60, newFrameMin * 60)
+
+      candles = candles.map((i) => {
+        const item = i
+        i.time = i.time / 1000
+
+        return item
+      })
 
       res.json({
         data: candles

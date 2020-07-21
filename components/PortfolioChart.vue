@@ -8,7 +8,7 @@
 </style>
 
 <script>
-import dayjs from 'dayjs'
+// import dayjs from 'dayjs'
 
 export default {
   name: 'PortfolioChart',
@@ -33,7 +33,9 @@ export default {
           borderColor: 'rgba(197, 203, 206, 1)'
         },
         timeScale: {
-          borderColor: 'rgba(197, 203, 206, 1)'
+          borderColor: 'rgba(197, 203, 206, 1)',
+          timeVisible: true,
+          secondsVisible: false
         }
       }
     }
@@ -53,14 +55,13 @@ export default {
 
     const trades = this.trades.map((i) => {
       return {
-        time: dayjs(i.closed_at).utc().format('YYYY-MM-DD'), // yyyy-mm-dd
-        // time: i.closed_at / 1000,
+        // time: dayjs(i.closed_at).utc().format('YYYY-MM-DD'), // yyyy-mm-dd
+        time: i.closed_at / 1000,
         value: i.size
       }
     })
 
     lineSeries.setData(trades)
-    chart.timeScale().getVisibleRange()
   },
   methods: {}
 }
