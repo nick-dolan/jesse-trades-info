@@ -96,6 +96,11 @@ export default {
   computed: {},
   mounted () {
   },
-  methods: {}
+  methods: {},
+  head () {
+    return {
+      title: `Backtest :: ${this.$route.params.backtest}`
+    }
+  }
 }
 </script>

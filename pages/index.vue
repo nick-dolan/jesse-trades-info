@@ -1,5 +1,5 @@
 <template>
-  <section class="container container-home mt-40">
+  <section class="container container-small mt-40">
     <Uploader/>
 
     <BacktestsList/>
@@ -7,9 +7,6 @@
 </template>
 
 <style scoped lang="scss">
-  .container.container-home {
-    max-width: 800px;
-  }
 </style>
 
 <script>
@@ -27,7 +24,6 @@ export default {
   },
   data () {
     return {
-      greeting: 'Hello jesse-trades-info'
     }
   },
   mounted () {
