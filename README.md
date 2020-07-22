@@ -22,4 +22,6 @@ npm run start
 
 After a successful start, you can open it at http://localhost:3000/.
 
+See the installation process video [here](https://vimeo.com/440370244). If you have any questions or feature requests, you may ask it [here](https://forum.jesse-ai.com/d/127-jesse-trades-info-tool-to-review-backtest-results).
+
 [![Watch the video](https://iili.io/dokccN.png)](https://vimeo.com/440370244)
