@@ -52,6 +52,12 @@
 .d-none {
   display: none !important;
 }
+.d-block {
+  display: block !important;
+}
+.d-inline-block {
+  display: inline-block !important;
+}
 .mono-font {
   font-family: var(--font-family-mono) !important;
 }

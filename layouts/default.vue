@@ -1,18 +1,41 @@
 <template>
-  <div>
-    <Nav/>
+  <div class="layout">
+    <div class="content">
+      <Nav/>
 
-    <Nuxt/>
+      <Nuxt/>
+    </div>
+
+    <Footer/>
   </div>
 </template>
 
+<style>
+  html, body, #__nuxt, #__layout {
+    height: 100%;
+  }
+  .layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .content {
+    flex: 1 0 auto;
+  }
+  .footer {
+    flex-shrink: 0;
+  }
+</style>
+
 <script>
 import Nav from '@/components/Nav'
+import Footer from '@/components/Footer'
 
 export default {
   name: 'Default',
   components: {
-    Nav
+    Nav,
+    Footer
   },
   data () {
     return {}

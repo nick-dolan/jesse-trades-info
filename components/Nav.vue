@@ -16,7 +16,9 @@
         </div>
       </div>
 
-      <div class="nav-right"/>
+      <div class="nav-right">
+        Jesse trades info
+      </div>
     </nav>
   </div>
 </template>
@@ -25,9 +27,10 @@
   .nav {
     margin-bottom: 16px;
     .nav-right {
-      margin-right: 16px;
       align-items: center;
-      margin-left: 20px;
+      font-size: 14px;
+      color: var(--color-darkGrey);
+      font-family: var(--font-family-mono);
     }
   }
   .tabs {
