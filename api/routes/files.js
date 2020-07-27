@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const { Router } = require('express')
 const multer = require('multer')
+const JSON5 = require('json5')
 
 const storage = multer.diskStorage({
   destination (req, file, cb) {
@@ -38,7 +39,7 @@ router.get('/read-file', (req, res, next) => {
       return next(error)
     }
 
-    res.send(data)
+    res.send(JSON5.parse(data))
   })
 })
 
