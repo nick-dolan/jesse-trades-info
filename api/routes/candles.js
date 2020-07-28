@@ -1,6 +1,10 @@
 const { Router } = require('express')
 const { Pool } = require('pg')
 const { batchCandleJSON } = require('candlestick-convert')
+const dayjs = require('dayjs')
+
+const utc = require('dayjs/plugin/utc')
+dayjs.extend(utc)
 
 const router = Router()
 
@@ -20,12 +24,24 @@ router.get('/candles', function (req, res) {
     exitTimestamp
   } = req.query
 
+  // Calculate the start time a day before the first trade
+  const entry = dayjs(parseInt(entryTimestamp))
+    .utc()
+    .subtract(1, 'day')
+    .unix() * 1000
+
+  // Calculate the exit time a day after the last trade
+  const exit = dayjs(parseInt(exitTimestamp))
+    .utc()
+    .add(1, 'day')
+    .unix() * 1000
+
   pool
     .query(`SELECT timestamp as time,open,high,low,close,volume
             FROM candle
             WHERE symbol='${symbol}'
             AND exchange='${exchange}'
-            AND timestamp BETWEEN ${entryTimestamp} AND ${exitTimestamp}`)
+            AND timestamp BETWEEN ${entry} AND ${exit}`)
     .then((result) => {
       const length = result.rows.length
       let newFrameMin = 1
