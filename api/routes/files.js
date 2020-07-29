@@ -52,6 +52,14 @@ router.get('/files-list', (req, res) => {
     .filter(el => /\.json$/.test(el))
     .map(item => path.parse(item).name)
 
+  // Sort files list (newest first)
+  jsonFiles.sort((a, b) => {
+    const one = fs.statSync(`uploads/${a}.json`).birthtimeMs
+    const two = fs.statSync(`uploads/${b}.json`).birthtimeMs
+
+    return two - one
+  })
+
   res.send(jsonFiles)
 })
 
