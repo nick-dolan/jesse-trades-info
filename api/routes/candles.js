@@ -27,13 +27,13 @@ router.get('/candles', function (req, res) {
   // Calculate the start time a day before the first trade
   const entry = dayjs(parseInt(entryTimestamp))
     .utc()
-    .subtract(1, 'day')
+    .subtract(2, 'hour')
     .unix() * 1000
 
   // Calculate the exit time a day after the last trade
   const exit = dayjs(parseInt(exitTimestamp))
     .utc()
-    .add(1, 'day')
+    .add(2, 'hour')
     .unix() * 1000
 
   pool
