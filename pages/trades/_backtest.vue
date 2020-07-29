@@ -1,5 +1,7 @@
 <template>
   <section class="container">
+    <Uploader/>
+
     <h1 class="text-capitalize">
       Backtest:
       <span class="mono-font font-size-16">
@@ -35,13 +37,15 @@
 import OHLC from '@/components/OHLC'
 import TradesList from '@/components/TradesList'
 import PortfolioChart from '@/components/PortfolioChart'
+import Uploader from '@/components/Uploader'
 
 export default {
   name: 'Backtest',
   components: {
     OHLC,
     TradesList,
-    PortfolioChart
+    PortfolioChart,
+    Uploader
   },
   async asyncData ({ $axios, route }) {
     let trades = []
