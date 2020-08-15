@@ -9,10 +9,10 @@
       </span>
     </h1>
 
-    <h2>Portfolio</h2>
+    <h2>PNL (%)</h2>
 
     <client-only>
-      <PortfolioChart :trades="trades"/>
+      <PNLChart :trades="trades"/>
     </client-only>
 
     <h2>Trades</h2>
@@ -36,7 +36,7 @@
 
 import OHLC from '@/components/OHLC'
 import TradesList from '@/components/TradesList'
-import PortfolioChart from '@/components/PortfolioChart'
+import PNLChart from '@/components/PNLChart'
 import Uploader from '@/components/Uploader'
 
 export default {
@@ -44,7 +44,7 @@ export default {
   components: {
     OHLC,
     TradesList,
-    PortfolioChart,
+    PNLChart,
     Uploader
   },
   async asyncData ({ $axios, route }) {

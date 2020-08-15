@@ -8,10 +8,8 @@
 </style>
 
 <script>
-// import dayjs from 'dayjs'
-
 export default {
-  name: 'PortfolioChart',
+  name: 'PNLChart',
   components: {},
   props: {
     trades: {
@@ -53,15 +51,18 @@ export default {
 
     chart.timeScale().fitContent()
 
-    const trades = this.trades.map((i) => {
-      return {
-        // time: dayjs(i.closed_at).utc().format('YYYY-MM-DD'), // yyyy-mm-dd
-        time: i.closed_at / 1000,
-        value: i.size
-      }
-    })
+    const pnl = []
 
-    lineSeries.setData(trades)
+    this.trades.reduce((result, item) => {
+      pnl.push({
+        time: item.closed_at / 1000,
+        value: (result + item.PNL_percentage).toFixed(2)
+      })
+
+      return result + item.PNL_percentage
+    }, 0)
+
+    lineSeries.setData(pnl)
   },
   methods: {}
 }
