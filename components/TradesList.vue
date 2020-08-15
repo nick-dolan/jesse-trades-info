@@ -6,6 +6,7 @@
       <thead>
         <tr>
           <th>Symbol</th>
+          <th>Type</th>
           <th>Opened at (UTC)</th>
           <th>Closed at (UTC)</th>
           <th>Holding period</th>
@@ -31,6 +32,9 @@
                 class="is-pointer">
                 {{ item.symbol }}
               </span>
+            </td>
+            <td>
+              <span class="text-uppercase">{{ item.type }}</span>
             </td>
             <td>
               <small>{{ item.opened_at | parseDate }}</small>
@@ -134,64 +138,64 @@
 </template>
 
 <style scoped lang="scss">
-  .remove-item {
-    display: flex;
-    align-items: center;
-    svg {
-      color: var(--color-grey);
-      &:hover {
-        color: var(--color-error);
-      }
+.remove-item {
+  display: flex;
+  align-items: center;
+  svg {
+    color: var(--color-grey);
+    &:hover {
+      color: var(--color-error);
     }
   }
-  .has-tooltip {
-    border-bottom: 1px dotted var(--color-grey);
+}
+.has-tooltip {
+  border-bottom: 1px dotted var(--color-grey);
+}
+.table-roundtrips {
+  .is-active {
+    background-color: var(--bg-secondary-color);
   }
-  .table-roundtrips {
-    .is-active {
-      background-color: var(--bg-secondary-color);
-    }
-    tr thead tr {
-      &:hover {
-        background-color: var(--bg-color);
-      }
-    }
-    .no-hover {
-      &:hover {
-        background-color: inherit;
-      }
-    }
-  }
-  .circle {
-    font-style: normal;
-    font-size: 8px;
-    &.is-green {
-      color: #00c100;
-    }
-    &.is-red {
-      color: #f71e32;
-    }
-  }
-  .orders-heading {
-    padding: 0 3px;
-  }
-  .table-orders {
-    th {
-      color: var(--font-color);
-      font-weight: 400;
-    }
-    tr {
+  tr thead tr {
+    &:hover {
       background-color: var(--bg-color);
     }
-    thead {
-      /*border-bottom: 1px solid var(--color-lightGrey);*/
-    }
-    tbody {
-      td {
-        font-size: 13px
-      }
+  }
+  .no-hover {
+    &:hover {
+      background-color: inherit;
     }
   }
+}
+.circle {
+  font-style: normal;
+  font-size: 8px;
+  &.is-green {
+    color: #00c100;
+  }
+  &.is-red {
+    color: #f71e32;
+  }
+}
+.orders-heading {
+  padding: 0 3px;
+}
+.table-orders {
+  th {
+    color: var(--font-color);
+    font-weight: 400;
+  }
+  tr {
+    background-color: var(--bg-color);
+  }
+  thead {
+    /*border-bottom: 1px solid var(--color-lightGrey);*/
+  }
+  tbody {
+    td {
+      font-size: 13px
+    }
+  }
+}
 </style>
 
 <script>
