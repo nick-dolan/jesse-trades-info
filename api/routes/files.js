@@ -47,6 +47,10 @@ router.get('/read-file', (req, res, next) => {
 * Get already uploaded backtests' file names
 * */
 router.get('/files-list', (req, res) => {
+  if (!fs.existsSync('uploads/')) {
+    fs.mkdirSync('uploads/')
+  }
+
   const jsonFiles = fs
     .readdirSync('uploads/')
     .filter(el => /\.json$/.test(el))
