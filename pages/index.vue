@@ -30,7 +30,7 @@ export default {
   methods: {},
   head () {
     return {
-      title: 'Home',
+      title: 'Trades :: Home',
       meta: [
         { hid: 'description', name: 'description', content: 'List of backtests' }
       ]

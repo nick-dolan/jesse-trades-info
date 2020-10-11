@@ -5,7 +5,7 @@
     <h1 class="text-capitalize">
       Backtest:
       <span class="mono-font font-size-16">
-        {{ $route.params.backtest }}
+        {{ backtestName }}
       </span>
     </h1>
 
@@ -89,13 +89,17 @@ export default {
       trades: []
     }
   },
-  computed: {},
+  computed: {
+    backtestName () {
+      return this.$route.params.backtest
+    }
+  },
   mounted () {
   },
   methods: {},
   head () {
     return {
-      title: `Backtest :: ${this.$route.params.backtest}`
+      title: `Trades :: ${this.backtestName.charAt(0).toUpperCase() + this.backtestName.slice(1)}`
     }
   }
 }

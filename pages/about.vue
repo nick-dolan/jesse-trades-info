@@ -59,7 +59,7 @@ export default {
   methods: {},
   head () {
     return {
-      title: 'About'
+      title: 'Trades :: About'
     }
   }
 }
