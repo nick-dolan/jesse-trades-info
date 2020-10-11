@@ -4,20 +4,23 @@
       <div>
         <a
           class="text-grey"
-          href="https://jesse-ai.com/"
-          target="_blank">Jesse AI</a>
+          title="The Open-source Python Framework For Trading Cryptocurrencies"
+          href="https://jesse.trade/"
+          target="_blank">Jesse</a>
 
         •
 
         <a
           class="text-grey"
-          href="https://forum.jesse-ai.com/d/127-jesse-trades-info-tool-to-review-backtest-results"
+          title="This is the place to discuss Jesse framework, trading strategies, ask your questions, etc"
+          href="https://forum.jesse.trade/d/127-jesse-trades-info-tool-to-review-backtest-results"
           target="_blank">Forum</a>
       </div>
 
       <div>
         <a
           class="text-grey"
+          title="Source Code of jesse-trades-info"
           href="https://github.com/nicolay-zlobin/jesse-trades-info"
           target="_blank">
           <githubIcon class="d-block" width="22px"/>
@@ -28,17 +31,17 @@
 </template>
 
 <style scoped lang="scss">
-  .footer {
-    height: 50px;
-    background-color: var(--bg-secondary-color);
-    font-size: 14px;
-    .container {
-      height: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+.footer {
+  height: 50px;
+  background-color: var(--bg-secondary-color);
+  font-size: 14px;
+  .container {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
+}
 </style>
 
 <script>

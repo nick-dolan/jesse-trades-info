@@ -6,8 +6,8 @@
           class="brand"
           to="/">
           <img
-            src="/jesse-ai-logo.png"
-            alt="Logo">
+            src="/svg/jesse-bot-logo.svg"
+            alt="Jesse Bot">
         </nuxt-link>
 
         <div class="tabs">

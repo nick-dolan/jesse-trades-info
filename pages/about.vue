@@ -7,6 +7,7 @@
 
       <a
         class="text-dark"
+        title="Source Code of jesse-trades-info"
         href="https://github.com/nicolay-zlobin/jesse-trades-info"
         target="_blank">
         <githubIcon width="24px"/>
@@ -14,7 +15,7 @@
     </header>
 
     <p>
-      This tool is supposed to work with <a href="https://jesse-ai.com/" target="_blank">Jesse</a>'s JSON files output
+      This tool is supposed to work with <a href="https://jesse.trade/" target="_blank">Jesse</a>'s JSON files output
       after backtest that you can get with a command like this:
     </p>
 
@@ -28,7 +29,7 @@
       If you have any questions or feature requests, you may ask it
       <a
         target="_blank"
-        href="https://forum.jesse-ai.com/d/127-jesse-trades-info-tool-to-review-backtest-results">here</a>.
+        href="https://forum.jesse.trade/d/127-jesse-trades-info-tool-to-review-backtest-results">here</a>.
     </p>
   </section>
 </template>

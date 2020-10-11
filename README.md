@@ -24,4 +24,4 @@ After a successful start, you can open it at http://localhost:3000/.
 
 See the installation process video [here](https://vimeo.com/440370244). If you have any questions or feature requests, you may ask it [here](https://forum.jesse-ai.com/d/127-jesse-trades-info-tool-to-review-backtest-results).
 
-![Watch the video](https://user-images.githubusercontent.com/25667028/92329618-363a9100-f071-11ea-9d59-44ae7f7703cf.png)
+![Watch the video](https://user-images.githubusercontent.com/25667028/95674071-82b84580-0bb6-11eb-8c36-c5417200b68c.png)
