@@ -1,6 +1,6 @@
 # Jesse trades info 
 
-Jesse trades info is the additional instrument for Jesse's trading framework that helps to parse JSON backtest files with trades and shows in a convenient way with tables and charts.
+Jesse trades info is the additional instrument for [Jesse](https://jesse-ai.com/)'s trading framework that helps to parse JSON backtest files with trades and shows in a convenient way with tables and charts.
 
 Firstly you need to set up a database. Rename `.env.example` into `.env` in the root directory with the same credentials as you are using with Jesse. It needed to get candles to draw a chart with trades.
 
