@@ -84,7 +84,7 @@
             v-show="rowVisibility.index === i && rowVisibility.visible"
             :key="'orders_' + i"
             class="no-hover">
-            <td colspan="11" style="padding: 5px 2%">
+            <td colspan="12" style="padding: 5px 2%">
               <h4 class="orders-heading mb-0 mt-10">Orders</h4>
 
               <table class="table table-orders table-hover mb-10">
