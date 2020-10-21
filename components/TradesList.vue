@@ -25,7 +25,7 @@
             :key="i"
             class="is-pointer"
             :class="{ 'is-active': rowVisibility.index === i && rowVisibility.visible }"
-            @click="showOrders(i)">
+            @click="showOrders(i); selectOrder(null)">
             <td>
               <span
                 v-tooltip="{ content: `Strategy: ${item.strategy_name}; Exchange: ${item.exchange}` }"
@@ -105,10 +105,11 @@
                 </thead>
                 <tbody>
                   <tr
-                    v-for="order in item.orders"
+                    v-for="(order, index) in item.orders"
                     :key="order.id"
+                    :class="{'selected-order': selectedOrder === index}"
                     class="is-pointer"
-                    @click="getOrderTime(order.executed_at)">
+                    @click="getOrderTime(order.executed_at); selectOrder(index)">
                     <td>{{ order.symbol }}</td>
                     <td>{{ order.exchange }}</td>
                     <td>
@@ -182,8 +183,9 @@ export default {
   },
   data () {
     return {
+      selectedOrder: null,
       rowVisibility: {
-        index: -1,
+        index: null,
         visible: false
       }
     }
@@ -193,9 +195,11 @@ export default {
       backtestsFileNames: state => state.files.backtestsFileNames
     })
   },
-  mounted () {
-  },
+  mounted () {},
   methods: {
+    selectOrder (index) {
+      this.selectedOrder = index
+    },
     getOrderTime (executedAt) {
       this.$emit('get-order-time', executedAt)
     },
@@ -260,15 +264,17 @@ export default {
     padding: 0 3px;
   }
   .table-orders {
+    .selected-order {
+      transition: background 100ms linear;
+      background: #f3f3f6;
+      background: var(--bg-secondary-color);
+    }
     th {
       color: var(--font-color);
       font-weight: 400;
     }
     tr {
       background-color: var(--bg-color);
-    }
-    thead {
-      /*border-bottom: 1px solid var(--color-lightGrey);*/
     }
     tbody {
       td {
