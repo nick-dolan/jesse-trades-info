@@ -25,9 +25,6 @@
   </section>
 </template>
 
-<style scoped lang="scss">
-</style>
-
 <script>
 
 import OHLC from '@/components/OHLC'

@@ -6,9 +6,6 @@
   </section>
 </template>
 
-<style scoped lang="scss">
-</style>
-
 <script>
 import Uploader from '../components/Uploader'
 import BacktestsList from '@/components/BacktestsList'

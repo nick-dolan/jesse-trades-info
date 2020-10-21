@@ -34,14 +34,6 @@
   </section>
 </template>
 
-<style scoped lang="scss">
-  .about-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-</style>
-
 <script>
 import githubIcon from '@/static/svg/github.svg'
 
@@ -64,3 +56,11 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+  .about-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+</style>

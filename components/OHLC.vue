@@ -5,10 +5,6 @@
     ref="chart"/>
 </template>
 
-<style scoped lang="scss">
-
-</style>
-
 <script>
 import { findIndex } from 'lodash'
 
