@@ -10,6 +10,7 @@
 </style>
 
 <script>
+import { findIndex } from 'lodash'
 
 export default {
   name: 'ChartOHLC',
@@ -54,7 +55,8 @@ export default {
           timeVisible: true,
           secondsVisible: false
         }
-      }
+      },
+      chart: {}
     }
   },
   computed: {},
@@ -62,20 +64,19 @@ export default {
   mounted () {
     this.$set(this.settings, 'width', this.$refs.chart.clientWidth)
 
-    const chart = LightweightCharts.createChart(this.$refs.chart, this.settings)
+    this.chart = LightweightCharts.createChart(this.$refs.chart, this.settings)
 
-    const candleSeries = chart.addCandlestickSeries()
+    const candleSeries = this.chart.addCandlestickSeries()
 
     candleSeries.setData(this.ohlc)
 
-    chart.timeScale().fitContent()
+    this.chart.timeScale().fitContent()
 
     const orders = this.orders.map((i) => {
       return {
         time: i.executed_at / 1000,
         position: 'inBar',
         color: i.side === 'buy' ? '#28bd14' : '#d43939',
-        // shape: i.side === 'buy' ? 'arrowUp' : 'arrowDown',
         shape: 'circle'
       }
     })
@@ -83,9 +84,26 @@ export default {
     candleSeries.setMarkers(orders)
   },
   methods: {
-    renderChart () {
+    getVisibleLogicalRange () {
+      return this.chart.timeScale().getVisibleLogicalRange()
+    },
+    closestCandleByTime (timestamp) {
+      return this.ohlc.reduce((prev, curr) => (Math.abs(curr.time - timestamp) < Math.abs(prev.time - timestamp)) ? curr : prev)
+    },
+    OHLCIndexByTime (time) {
+      const closest = this.closestCandleByTime(time / 1000).time
 
+      return findIndex(this.ohlc, { time: closest })
+    },
+    scrollTo (time) {
+      const indexToScroll = this.OHLCIndexByTime(time)
+      const logicalRange = this.getVisibleLogicalRange()
+      const indent = (logicalRange.to - logicalRange.from) / 2
+      const ohlcSize = this.ohlc.length - 1
+
+      this.chart.timeScale().scrollToPosition(-ohlcSize + indexToScroll + indent, true)
     }
   }
 }
 </script>
+

@@ -13,13 +13,15 @@
 
     <client-only>
       <OHLC
+        ref="tradesChart"
         :orders="orders"
         :ohlc="candles"
         class="mb-10"/>
     </client-only>
 
     <TradesList
-      :trades="trades"/>
+      :trades="trades"
+      @get-order-time="scrollToTime"/>
   </section>
 </template>
 
@@ -96,7 +98,11 @@ export default {
   },
   mounted () {
   },
-  methods: {},
+  methods: {
+    scrollToTime (time) {
+      this.$refs.tradesChart.scrollTo(time)
+    }
+  },
   head () {
     return {
       title: `Trades :: ${this.backtestName.charAt(0).toUpperCase() + this.backtestName.slice(1)}`

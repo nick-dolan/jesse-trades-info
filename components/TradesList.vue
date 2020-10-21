@@ -104,7 +104,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="order in item.orders" :key="order.id">
+                  <tr
+                    v-for="order in item.orders"
+                    :key="order.id"
+                    class="is-pointer"
+                    @click="getOrderTime(order.executed_at)">
                     <td>{{ order.symbol }}</td>
                     <td>{{ order.exchange }}</td>
                     <td>
@@ -126,7 +130,6 @@
                       {{ order.canceled_at ? order.canceled_at : '–' }}
                     </td>
                   </tr>
-                  <!--"flag": "ReduceOnly",-->
                 </tbody>
               </table>
             </td>
@@ -254,6 +257,9 @@ export default {
   mounted () {
   },
   methods: {
+    getOrderTime (executedAt) {
+      this.$emit('get-order-time', executedAt)
+    },
     deleteBacktest (fileName) {
       this.$store.dispatch('files/removeFile', fileName)
     },
