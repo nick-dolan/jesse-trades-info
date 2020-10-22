@@ -14,7 +14,7 @@
     <client-only>
       <OHLC
         ref="tradesChart"
-        :orders="orders"
+        :raw-orders="orders"
         :ohlc="candles"
         class="mb-10"/>
     </client-only>

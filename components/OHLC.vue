@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { findIndex } from 'lodash'
+import { findIndex, sortBy, filter } from 'lodash'
 
 export default {
   name: 'ChartOHLC',
@@ -17,7 +17,7 @@ export default {
       default: () => [],
       required: true
     },
-    orders: {
+    rawOrders: {
       type: Array,
       default: () => [],
       required: true
@@ -52,7 +52,9 @@ export default {
           secondsVisible: false
         }
       },
-      chart: {}
+      chart: {},
+      candleSeries: {},
+      orders: this.rawOrders
     }
   },
   computed: {},
@@ -62,22 +64,23 @@ export default {
 
     this.chart = LightweightCharts.createChart(this.$refs.chart, this.settings)
 
-    const candleSeries = this.chart.addCandlestickSeries()
+    this.candleSeries = this.chart.addCandlestickSeries()
 
-    candleSeries.setData(this.ohlc)
+    this.candleSeries.setData(this.ohlc)
 
     this.chart.timeScale().fitContent()
 
-    const orders = this.orders.map((i) => {
+    this.orders = this.orders.map((i) => {
       return {
         time: i.executed_at / 1000,
         position: 'inBar',
         color: i.side === 'buy' ? '#28bd14' : '#d43939',
-        shape: 'circle'
+        shape: 'circle',
+        text: ''
       }
     })
 
-    candleSeries.setMarkers(orders)
+    this.candleSeries.setMarkers(this.orders)
   },
   methods: {
     getVisibleLogicalRange () {
@@ -86,18 +89,43 @@ export default {
     closestCandleByTime (timestamp) {
       return this.ohlc.reduce((prev, curr) => (Math.abs(curr.time - timestamp) < Math.abs(prev.time - timestamp)) ? curr : prev)
     },
-    OHLCIndexByTime (time) {
+    OHLCItemByTime (time) {
       const closest = this.closestCandleByTime(time / 1000).time
 
-      return findIndex(this.ohlc, { time: closest })
+      return {
+        index: findIndex(this.ohlc, { time: closest }),
+        time: closest
+      }
+    },
+    scrollToPosition (index) {
+      this.chart.timeScale().scrollToPosition(index, true)
+    },
+    addScrollPointer (time) {
+      // Remove previous pointer if exists
+      this.orders = filter(this.orders, (item) => {
+        return item.text !== '▽'
+      })
+
+      // Add pointer to selected order
+      this.orders.push({
+        time,
+        position: 'aboveBar',
+        color: '#ffc600',
+        text: '▽'
+      })
+
+      // Update markers
+      this.candleSeries.setMarkers(sortBy(this.orders, ['time']))
     },
     scrollTo (time) {
-      const indexToScroll = this.OHLCIndexByTime(time)
+      const candleToScroll = this.OHLCItemByTime(time)
+
       const logicalRange = this.getVisibleLogicalRange()
       const indent = (logicalRange.to - logicalRange.from) / 2
       const ohlcSize = this.ohlc.length - 1
 
-      this.chart.timeScale().scrollToPosition(-ohlcSize + indexToScroll + indent, true)
+      this.addScrollPointer(candleToScroll.time)
+      this.scrollToPosition(-ohlcSize + candleToScroll.index + indent)
     }
   }
 }
