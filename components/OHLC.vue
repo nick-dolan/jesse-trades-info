@@ -2,11 +2,12 @@
 <template>
   <div
     id="chart"
-    ref="chart"/>
+    ref="chart"
+    class="ohlc-chart"/>
 </template>
 
 <script>
-import { findIndex, sortBy, filter } from 'lodash'
+import { findIndex, sortedIndexBy } from 'lodash'
 
 export default {
   name: 'ChartOHLC',
@@ -113,20 +114,24 @@ export default {
     },
     addScrollPointer (time) {
       // Remove previous pointer if exists
-      this.orders = filter(this.orders, (item) => {
-        return item.text !== '▽'
-      })
+      const index = this.orders.findIndex(item => item.text === '▽')
 
-      // Add pointer to selected order
-      this.orders.push({
+      if (index !== -1) {
+        this.orders.splice(index, 1)
+      }
+
+      const markerToAdd = {
         time,
         position: 'aboveBar',
         color: '#ffc600',
         text: '▽'
-      })
+      }
+
+      // Add pointer to selected order
+      this.orders.splice(sortedIndexBy(this.orders, markerToAdd, 'time'), 0, markerToAdd)
 
       // Update markers
-      this.candleSeries.setMarkers(sortBy(this.orders, ['time']))
+      this.candleSeries.setMarkers(this.orders)
     },
     scrollTo (time) {
       if (this.allowScroll) {
@@ -143,4 +148,3 @@ export default {
   }
 }
 </script>
-
