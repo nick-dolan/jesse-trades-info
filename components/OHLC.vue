@@ -54,7 +54,8 @@ export default {
       },
       chart: {},
       candleSeries: {},
-      orders: this.rawOrders
+      orders: this.rawOrders,
+      allowScroll: true
     }
   },
   computed: {},
@@ -98,6 +99,16 @@ export default {
       }
     },
     scrollToPosition (index) {
+      this.allowScroll = false
+      this.chart.timeScale().scrollToPosition(index, true)
+
+      const vm = this
+
+      setTimeout(() => {
+        vm.allowScroll = true
+      }, 1000)
+    },
+    scrollToPositionOld (index) {
       this.chart.timeScale().scrollToPosition(index, true)
     },
     addScrollPointer (time) {
@@ -118,14 +129,16 @@ export default {
       this.candleSeries.setMarkers(sortBy(this.orders, ['time']))
     },
     scrollTo (time) {
-      const candleToScroll = this.OHLCItemByTime(time)
+      if (this.allowScroll) {
+        const candleToScroll = this.OHLCItemByTime(time)
 
-      const logicalRange = this.getVisibleLogicalRange()
-      const indent = (logicalRange.to - logicalRange.from) / 2
-      const ohlcSize = this.ohlc.length - 1
+        const logicalRange = this.getVisibleLogicalRange()
+        const indent = (logicalRange.to - logicalRange.from) / 2
+        const ohlcSize = this.ohlc.length - 1
 
-      this.addScrollPointer(candleToScroll.time)
-      this.scrollToPosition(-ohlcSize + candleToScroll.index + indent)
+        this.addScrollPointer(candleToScroll.time)
+        this.scrollToPosition(-ohlcSize + candleToScroll.index + indent)
+      }
     }
   }
 }
