@@ -3,6 +3,7 @@
   <div
     id="chart"
     ref="chart"
+    :class="{ 'ohlc-chart-sticky': isSticky }"
     class="ohlc-chart"/>
 </template>
 
@@ -13,6 +14,10 @@ export default {
   name: 'ChartOHLC',
   components: {},
   props: {
+    isSticky: {
+      type: Boolean,
+      default: true
+    },
     ohlc: {
       type: Array,
       default: () => [],
@@ -144,10 +149,12 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
   .ohlc-chart {
-    top: 10px;
-    position: sticky;
-    z-index: 10;
+    &.ohlc-chart-sticky {
+      top: 10px;
+      position: sticky;
+      z-index: 10;
+    }
   }
 </style>

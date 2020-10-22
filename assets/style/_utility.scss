@@ -70,6 +70,12 @@
 .d-block {
   display: block !important;
 }
+.justify-content-between {
+  justify-content: space-between !important;
+}
+.align-items-center {
+  align-items: center;
+}
 .d-inline-block {
   display: inline-block !important;
 }
@@ -78,4 +84,7 @@
 }
 .font-size-16 {
   font-size: 16px !important;
+}
+.user-select-none {
+  user-select: none !important;
 }

@@ -92,7 +92,7 @@
 
               <table
                 class="table table-orders table-hover mb-10">
-                <thead :class="{ 'table-orders-sticky-row': !isTableOverflown }">
+                <thead :class="{ 'table-orders-sticky-row': !isTableOverflown && isSticky }">
                   <tr>
                     <th>Symbol</th>
                     <th>Exchange</th>
@@ -183,6 +183,10 @@ export default {
       type: Array,
       required: true,
       default: () => []
+    },
+    isSticky: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
@@ -230,11 +234,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  thead th {
-    position: sticky;
-    top: 0;
-  }
-
   .remove-item {
     display: flex;
     align-items: center;

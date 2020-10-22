@@ -9,18 +9,33 @@
       </span>
     </h1>
 
-    <h2>Trades</h2>
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>Trades</h2>
+
+      <div class="form-check form-switch">
+        <label
+          class="form-check-label user-select-none text-grey"
+          for="sticky_chart_switch">Sticky Chart</label>
+        <input
+          id="sticky_chart_switch"
+          v-model="isStickyChart"
+          class="form-check-input"
+          type="checkbox">
+      </div>
+    </div>
 
     <client-only>
       <OHLC
         ref="tradesChart"
         :raw-orders="orders"
+        :is-sticky="isStickyChart"
         :ohlc="candles"
         class="mb-10"/>
     </client-only>
 
     <TradesList
       :trades="trades"
+      :is-sticky="isStickyChart"
       @get-order-time="scrollToTime"/>
   </section>
 </template>
@@ -85,7 +100,8 @@ export default {
     return {
       orders: [],
       candles: [],
-      trades: []
+      trades: [],
+      isStickyChart: true
     }
   },
   computed: {
