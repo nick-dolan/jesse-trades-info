@@ -28,7 +28,7 @@ export default {
     return {
       settings: {
         width: 800,
-        height: 420,
+        height: 380,
         layout: {
           backgroundColor: '#131722',
           textColor: '#d1d4dc'
@@ -88,15 +88,10 @@ export default {
     getVisibleLogicalRange () {
       return this.chart.timeScale().getVisibleLogicalRange()
     },
-    closestCandleByTime (timestamp) {
-      return this.ohlc.reduce((prev, curr) => (Math.abs(curr.time - timestamp) < Math.abs(prev.time - timestamp)) ? curr : prev)
-    },
     OHLCItemByTime (time) {
-      const closest = this.closestCandleByTime(time / 1000).time
-
       return {
-        index: findIndex(this.ohlc, { time: closest }),
-        time: closest
+        index: findIndex(this.ohlc, { time }),
+        time
       }
     },
     scrollToPosition (index) {
@@ -135,7 +130,7 @@ export default {
     },
     scrollTo (time) {
       if (this.allowScroll) {
-        const candleToScroll = this.OHLCItemByTime(time)
+        const candleToScroll = this.OHLCItemByTime(time / 1000)
 
         const logicalRange = this.getVisibleLogicalRange()
         const indent = (logicalRange.to - logicalRange.from) / 2
@@ -148,3 +143,11 @@ export default {
   }
 }
 </script>
+
+<style>
+  .ohlc-chart {
+    top: 10px;
+    position: sticky;
+    z-index: 10;
+  }
+</style>

@@ -1,5 +1,8 @@
 <template>
-  <section class="table-wrapper mb-40">
+  <section
+    ref="tableWrapper"
+    :class="{ 'table-wrapper': isTableOverflown }"
+    class="mb-40">
     <h2>Roundtrips</h2>
 
     <table class="table table-roundtrips table-hover">
@@ -87,8 +90,9 @@
             <td colspan="12" style="padding: 5px 2%">
               <h4 class="orders-heading mb-0 mt-10">Orders</h4>
 
-              <table class="table table-orders table-hover mb-10">
-                <thead>
+              <table
+                class="table table-orders table-hover mb-10">
+                <thead :class="{ 'table-orders-sticky-row': !isTableOverflown }">
                   <tr>
                     <th>Symbol</th>
                     <th>Exchange</th>
@@ -184,6 +188,7 @@ export default {
   data () {
     return {
       selectedOrder: null,
+      isTableOverflown: true,
       rowVisibility: {
         index: null,
         visible: false
@@ -195,7 +200,15 @@ export default {
       backtestsFileNames: state => state.files.backtestsFileNames
     })
   },
-  mounted () {},
+  created () {
+  },
+  mounted () {
+    function isOverflown (element) {
+      return element.scrollWidth > element.clientWidth
+    }
+
+    this.isTableOverflown = isOverflown(this.$refs.tableWrapper)
+  },
   methods: {
     selectOrder (index) {
       this.selectedOrder = index
@@ -236,9 +249,6 @@ export default {
     border-bottom: 1px dotted var(--color-grey);
   }
   .table-roundtrips {
-    .is-active {
-      background-color: var(--bg-secondary-color);
-    }
     tr thead tr {
       &:hover {
         background-color: var(--bg-color);
@@ -264,6 +274,16 @@ export default {
     padding: 0 3px;
   }
   .table-orders {
+    .table-orders-sticky-row {
+      border-bottom: 0;
+      th {
+        position: sticky;
+        top: 390px;
+        background-color: var(--bg-secondary-color);
+        z-index: 9;
+        box-shadow: inset 0 -1px 0 var(--color-lightGrey);
+      }
+    }
     .selected-order {
       transition: background 100ms linear;
       background: #f3f3f6;
