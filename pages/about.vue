@@ -31,6 +31,8 @@
         target="_blank"
         href="https://forum.jesse.trade/d/127-jesse-trades-info-tool-to-review-backtest-results">here</a>.
     </p>
+
+    <p class="text-center text-primary"><strong>Thanks for support!</strong></p>
   </section>
 </template>
 
