@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { findIndex, sortedIndexBy } from 'lodash'
+import { sortedIndexBy } from 'lodash'
 
 export default {
   name: 'ChartOHLC',
@@ -95,7 +95,7 @@ export default {
     },
     OHLCItemByTime (time) {
       return {
-        index: findIndex(this.ohlc, { time }),
+        index: this.ohlc.findIndex(item => item.time === time),
         time
       }
     },
