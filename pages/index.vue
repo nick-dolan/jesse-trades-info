@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Uploader from '../components/Uploader'
+import Uploader from '@/components/Uploader'
 import BacktestsList from '@/components/BacktestsList'
 
 export default {
