@@ -9,6 +9,12 @@
       </span>
     </h1>
 
+    <h2>Equity Curve</h2>
+
+    <client-only>
+      <EquityCurveChart :equity-curve="equityCurve"/>
+    </client-only>
+
     <div class="d-flex justify-content-between align-items-center">
       <h2>Trades</h2>
 
@@ -45,13 +51,15 @@
 import OHLC from '@/components/OHLC'
 import TradesList from '@/components/TradesList'
 import Uploader from '@/components/Uploader'
+import EquityCurveChart from '@/components/EquityCurveChart'
 
 export default {
   name: 'Backtest',
   components: {
     OHLC,
     TradesList,
-    Uploader
+    Uploader,
+    EquityCurveChart
   },
   async asyncData ({ $axios, route }) {
     let trades = []
@@ -65,6 +73,18 @@ export default {
       .then((result) => {
         trades = result.trades
       })
+
+    let balance = 10000
+
+    // Balance line
+    const equityCurve = trades.map((item) => {
+      balance = balance + (item.size * item.PNL_percentage / 100)
+
+      return {
+        value: balance,
+        time: item.closed_at / 1000
+      }
+    })
 
     // Get orders to draw them on chart
     let orders = trades.map((item) => {
@@ -92,6 +112,7 @@ export default {
 
     return {
       trades,
+      equityCurve,
       candles,
       orders
     }
@@ -101,6 +122,7 @@ export default {
       orders: [],
       candles: [],
       trades: [],
+      equityCurve: [],
       isStickyChart: true
     }
   },

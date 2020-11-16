@@ -4,15 +4,12 @@
     ref="chart"/>
 </template>
 
-<style scoped lang="scss">
-</style>
-
 <script>
 export default {
-  name: 'PNLChart',
+  name: 'EquityCurveChart',
   components: {},
   props: {
-    trades: {
+    equityCurve: {
       type: Array,
       default: () => [],
       required: true
@@ -51,18 +48,7 @@ export default {
 
     chart.timeScale().fitContent()
 
-    const pnl = []
-
-    this.trades.reduce((result, item) => {
-      pnl.push({
-        time: item.closed_at / 1000,
-        value: (result + item.PNL_percentage).toFixed(2)
-      })
-
-      return result + item.PNL_percentage
-    }, 0)
-
-    lineSeries.setData(pnl)
+    lineSeries.setData(this.equityCurve)
   },
   methods: {}
 }
