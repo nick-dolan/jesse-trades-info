@@ -62,6 +62,9 @@ export default {
     EquityCurveChart
   },
   async asyncData ({ $axios, route }) {
+    //
+    // Trades
+    //
     let trades = []
 
     await $axios
@@ -74,25 +77,9 @@ export default {
         trades = result.trades
       })
 
-    let balance = 10000
-
-    // Balance line
-    const equityCurve = trades.map((item) => {
-      balance = balance + (item.size * item.PNL_percentage / 100)
-
-      return {
-        value: balance,
-        time: item.closed_at / 1000
-      }
-    })
-
-    // Get orders to draw them on chart
-    let orders = trades.map((item) => {
-      return [...item.orders]
-    })
-
-    orders = orders.flat()
-
+    //
+    // Candles
+    //
     let candles = []
 
     if (trades.length > 0) {
@@ -109,6 +96,34 @@ export default {
           candles = result.data
         })
     }
+
+    //
+    // Balance line
+    //
+    let balance = 10000
+
+    const equityCurve = trades.map((item) => {
+      balance = balance + (item.size * item.PNL_percentage / 100)
+
+      return {
+        value: balance,
+        time: item.closed_at / 1000
+      }
+    })
+
+    equityCurve.unshift({
+      value: 10000,
+      time: candles[0].time
+    })
+
+    //
+    // Orders
+    //
+    let orders = trades.map((item) => {
+      return [...item.orders]
+    })
+
+    orders = orders.flat()
 
     return {
       trades,
