@@ -27,7 +27,7 @@ export default {
   methods: {},
   head () {
     return {
-      title: 'Trades :: Home',
+      title: 'JTI :: Home',
       meta: [
         { hid: 'description', name: 'description', content: 'List of backtests' }
       ]

@@ -174,7 +174,7 @@ export default {
   },
   head () {
     return {
-      title: `Trades :: ${this.backtestName.charAt(0).toUpperCase() + this.backtestName.slice(1)}`
+      title: `JTI :: ${this.backtestName.charAt(0).toUpperCase() + this.backtestName.slice(1)}`
     }
   }
 }

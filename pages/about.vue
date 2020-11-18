@@ -53,7 +53,7 @@ export default {
   methods: {},
   head () {
     return {
-      title: 'Trades :: About'
+      title: 'JTI :: About'
     }
   }
 }
