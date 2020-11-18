@@ -21,16 +21,17 @@ router.get('/candles', function (req, res) {
     symbol,
     exchange,
     entryTimestamp,
-    exitTimestamp
+    exitTimestamp,
+    selectedTimeframe = null
   } = req.query
 
-  // Calculate the start time a day before the first trade
+  // Add time before start time of first trade
   const entry = dayjs(parseInt(entryTimestamp))
     .utc()
     .subtract(2, 'hour')
     .unix() * 1000
 
-  // Calculate the exit time a day after the last trade
+  // Add time after end time of last trade
   const exit = dayjs(parseInt(exitTimestamp))
     .utc()
     .add(2, 'hour')
@@ -43,32 +44,33 @@ router.get('/candles', function (req, res) {
             AND exchange='${exchange}'
             AND timestamp BETWEEN ${entry} AND ${exit}`)
     .then((result) => {
-      const length = result.rows.length
-      let newFrameMin = 1
+      const supportedTimeframes = [1, 3, 5, 15, 30, 60, 120, 180, 240, 360, 480, 1440]
+      const candlesLength = result.rows.length
+      const goal = 15000
+      let calculatedFrame = 60
 
-      if (length > 10081 && length < 20160) {
-        newFrameMin = 3
+      if (selectedTimeframe) {
+        calculatedFrame = selectedTimeframe
       }
-      else if (length >= 20161 && length < 40320) {
-        newFrameMin = 5
-      }
-      else if (length >= 40321 && length < 80640) {
-        newFrameMin = 15
-      }
-      else if (length >= 80641 && length < 161280) {
-        newFrameMin = 30
-      }
-      else if (length >= 161281 && length < 322560) {
-        newFrameMin = 60
-      }
-      else if (length >= 322561 && length < 645120) {
-        newFrameMin = 120
-      }
-      else if (length >= 645121) {
-        newFrameMin = 180
+      else {
+        // Calculate
+        let current = null
+
+        for (let i = 0; i < supportedTimeframes.length; i++) {
+          const count = candlesLength / supportedTimeframes[i]
+
+          if (Math.abs(goal - count) < Math.abs(goal - current)) {
+            current = count
+            calculatedFrame = supportedTimeframes[i]
+          }
+        }
+
+        if (!current) {
+          calculatedFrame = supportedTimeframes[supportedTimeframes.length - 1]
+        }
       }
 
-      let candles = batchCandleJSON(result.rows, 60, newFrameMin * 60)
+      let candles = batchCandleJSON(result.rows, 60, calculatedFrame * 60)
 
       candles = candles.map((i) => {
         const item = i
@@ -78,6 +80,7 @@ router.get('/candles', function (req, res) {
       })
 
       res.json({
+        calculatedFrame,
         data: candles
       })
     })

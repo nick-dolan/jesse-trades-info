@@ -1,18 +1,15 @@
 .m-0 {
   margin: 0 !important;
 }
-
 .mt-0 {
   margin-top: 0 !important;
 }
 .mb-0 {
   margin-bottom: 0 !important;
 }
-
 .ml-5 {
   margin-left: 5px;
 }
-
 .mb-10 {
   margin-bottom: 10px !important;
 }
@@ -64,6 +61,12 @@
 .d-flex {
   display: flex !important;
 }
+.flex-grow-1 {
+  flex-grow: 1 !important;
+}
+.d-inline-block {
+  display: inline-block !important;
+}
 .d-none {
   display: none !important;
 }
@@ -88,3 +91,10 @@
 .user-select-none {
   user-select: none !important;
 }
+.w-100 {
+  width: 100% !important;
+}
+
+
+
+

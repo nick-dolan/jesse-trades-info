@@ -16,7 +16,9 @@
     </client-only>
 
     <div class="d-flex justify-content-between align-items-center">
-      <h2>Trades</h2>
+      <h2>
+        Trades
+      </h2>
 
       <div class="form-check form-switch">
         <label
@@ -31,12 +33,23 @@
     </div>
 
     <client-only>
-      <OHLC
-        ref="tradesChart"
-        :raw-orders="orders"
-        :is-sticky="isStickyChart"
-        :ohlc="candles"
-        class="mb-10"/>
+      <div
+        :class="{ 'is-sticky': isStickyChart }"
+        class="chart-wrapper d-flex mb-40">
+        <small class="trades-candles-length">Number of candles: {{ candles.length }}</small>
+
+        <RangeSwitcher
+          :trades="trades"
+          :candles.sync="candles"
+          :calculated-timeframe="calculatedTimeframe"/>
+
+        <OHLC
+          ref="tradesChart"
+          :raw-orders="orders"
+          :is-sticky="isStickyChart"
+          :ohlc="candles"
+          class="flex-grow-1 w-100"/>
+      </div>
     </client-only>
 
     <TradesList
@@ -52,6 +65,7 @@ import OHLC from '@/components/OHLC'
 import TradesList from '@/components/TradesList'
 import Uploader from '@/components/Uploader'
 import EquityCurveChart from '@/components/EquityCurveChart'
+import RangeSwitcher from '@/components/RangeSwitcher'
 
 export default {
   name: 'Backtest',
@@ -59,7 +73,8 @@ export default {
     OHLC,
     TradesList,
     Uploader,
-    EquityCurveChart
+    EquityCurveChart,
+    RangeSwitcher
   },
   async asyncData ({ $axios, route }) {
     //
@@ -81,6 +96,7 @@ export default {
     // Candles
     //
     let candles = []
+    let calculatedTimeframe = null
 
     if (trades.length > 0) {
       await $axios
@@ -93,6 +109,7 @@ export default {
           }
         })
         .then((result) => {
+          calculatedTimeframe = result.calculatedFrame
           candles = result.data
         })
     }
@@ -129,6 +146,7 @@ export default {
       trades,
       equityCurve,
       candles,
+      calculatedTimeframe,
       orders
     }
   },
@@ -138,6 +156,7 @@ export default {
       candles: [],
       trades: [],
       equityCurve: [],
+      calculatedTimeframe: null,
       isStickyChart: true
     }
   },
@@ -160,3 +179,22 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .chart-wrapper {
+    background-color: #111723;
+    position: relative;
+    &.is-sticky {
+      top: 12px;
+      position: sticky;
+      z-index: 10;
+    }
+    .trades-candles-length {
+      position: absolute;
+      color: var(--color-grey);
+      top: -12px;
+      left: 0;
+      font-size: 8px;
+    }
+  }
+</style>

@@ -27,6 +27,7 @@ module.exports = {
     'vue/html-closing-bracket-spacing': 'off',
     'vue/html-closing-bracket-newline': 'off',
     'brace-style': [2, 'stroustrup'],
+    'no-lonely-if': 'off',
     'no-multiple-empty-lines': 0,
     'no-trailing-spaces': 0,
     'space-before-function-paren': ['error', {

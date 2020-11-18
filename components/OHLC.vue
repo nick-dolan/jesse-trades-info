@@ -3,7 +3,6 @@
   <div
     id="chart"
     ref="chart"
-    :class="{ 'ohlc-chart-sticky': isSticky }"
     class="ohlc-chart"/>
 </template>
 
@@ -14,10 +13,6 @@ export default {
   name: 'ChartOHLC',
   components: {},
   props: {
-    isSticky: {
-      type: Boolean,
-      default: true
-    },
     ohlc: {
       type: Array,
       default: () => [],
@@ -65,7 +60,19 @@ export default {
     }
   },
   computed: {},
-  watch: {},
+  watch: {
+    ohlc (value) {
+      this.chart.removeSeries(this.candleSeries)
+      this.candleSeries = null
+
+      this.candleSeries = this.chart.addCandlestickSeries()
+      this.candleSeries.setData(value)
+
+      this.candleSeries.setMarkers(this.orders)
+
+      this.chart.timeScale().fitContent()
+    }
+  },
   mounted () {
     this.$set(this.settings, 'width', this.$refs.chart.clientWidth)
 
@@ -109,9 +116,6 @@ export default {
         vm.allowScroll = true
       }, 1000)
     },
-    scrollToPositionOld (index) {
-      this.chart.timeScale().scrollToPosition(index, true)
-    },
     addScrollPointer (time) {
       // Remove previous pointer if exists
       const index = this.orders.findIndex(item => item.text === '▽')
@@ -148,13 +152,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-  .ohlc-chart {
-    &.ohlc-chart-sticky {
-      top: 10px;
-      position: sticky;
-      z-index: 10;
-    }
-  }
-</style>
