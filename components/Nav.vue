@@ -13,6 +13,7 @@
         <div class="tabs">
           <nuxt-link exact-active-class="active" to="/">Home</nuxt-link>
           <nuxt-link active-class="active" to="/about">About</nuxt-link>
+          <nuxt-link active-class="active" to="/settings">Settings</nuxt-link>
         </div>
       </div>
 

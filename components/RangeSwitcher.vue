@@ -3,7 +3,7 @@
     <button
       v-for="(item, i) in timeframes"
       :key="i"
-      :disabled="item.value < calculatedTimeframe"
+      :disabled="item.value < calculatedTimeframe && !allowAllTimeframes"
       :class="{ 'active': selectedTimeframe === item.value }"
       @click="getCandlesByFrame(item.value)">
       <i
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+
+import { mapState } from 'vuex'
 
 export default {
   name: 'RangeSwitcher',
@@ -98,7 +100,11 @@ export default {
       loading: false
     }
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      allowAllTimeframes: state => state.settings.allowAllTimeframes
+    })
+  },
   mounted () {
   },
   methods: {

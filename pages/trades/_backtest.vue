@@ -9,33 +9,28 @@
       </span>
     </h1>
 
-    <h2>Equity Curve</h2>
+    <template v-if="equityCurveIsVisible">
+      <h2>Equity Curve</h2>
 
-    <client-only>
-      <EquityCurveChart :equity-curve="equityCurve"/>
-    </client-only>
+      <client-only>
+        <EquityCurveChart
+          class="mb-20"
+          :equity-curve="equityCurve"/>
+      </client-only>
+    </template>
 
     <div class="d-flex justify-content-between align-items-center">
       <h2>
         Trades
       </h2>
 
-      <div class="form-check form-switch">
-        <label
-          class="form-check-label user-select-none text-grey"
-          for="sticky_chart_switch">Sticky Chart</label>
-        <input
-          id="sticky_chart_switch"
-          v-model="isStickyChart"
-          class="form-check-input"
-          type="checkbox">
-      </div>
+      <StickyChartSwitcher/>
     </div>
 
     <client-only>
       <div
         :class="{ 'is-sticky': isStickyChart }"
-        class="chart-wrapper d-flex mb-40">
+        class="chart-wrapper d-flex mb-20">
         <small class="trades-candles-length">Number of candles: {{ candles.length }}</small>
 
         <RangeSwitcher
@@ -66,6 +61,8 @@ import TradesList from '@/components/TradesList'
 import Uploader from '@/components/Uploader'
 import EquityCurveChart from '@/components/EquityCurveChart'
 import RangeSwitcher from '@/components/RangeSwitcher'
+import StickyChartSwitcher from '@/components/StickyChartSwitcher'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Backtest',
@@ -74,7 +71,8 @@ export default {
     TradesList,
     Uploader,
     EquityCurveChart,
-    RangeSwitcher
+    RangeSwitcher,
+    StickyChartSwitcher
   },
   async asyncData ({ $axios, route }) {
     //
@@ -156,11 +154,14 @@ export default {
       candles: [],
       trades: [],
       equityCurve: [],
-      calculatedTimeframe: null,
-      isStickyChart: true
+      calculatedTimeframe: null
     }
   },
   computed: {
+    ...mapState({
+      isStickyChart: state => state.settings.isStickyChart,
+      equityCurveIsVisible: state => state.settings.equityCurveIsVisible
+    }),
     backtestName () {
       return this.$route.params.backtest
     }
