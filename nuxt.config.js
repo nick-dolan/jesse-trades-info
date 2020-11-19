@@ -54,8 +54,8 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    '~/plugins/axios.js',
     '~/plugins/persistedState.client.js',
+    '~/plugins/axios.js',
     '~/plugins/tooltip.client.js'
   ],
   /*

@@ -9,7 +9,7 @@
       </span>
     </h1>
 
-    <template v-if="equityCurveIsVisible">
+    <template v-if="showEquityCurve">
       <h2>Equity Curve</h2>
 
       <client-only>
@@ -116,20 +116,23 @@ export default {
     // Balance line
     //
     let balance = 10000
+    let equityCurve = []
 
-    const equityCurve = trades.map((item) => {
-      balance = balance + (item.size * item.PNL_percentage / 100)
+    if (trades.length > 0) {
+      equityCurve = trades.map((item) => {
+        balance = balance + (item.size * item.PNL_percentage / 100)
 
-      return {
-        value: balance,
-        time: item.closed_at / 1000
-      }
-    })
+        return {
+          value: balance,
+          time: item.closed_at / 1000
+        }
+      })
 
-    equityCurve.unshift({
-      value: 10000,
-      time: candles[0].time
-    })
+      equityCurve.unshift({
+        value: 10000,
+        time: trades[0].opened_at / 1000
+      })
+    }
 
     //
     // Orders
@@ -154,7 +157,8 @@ export default {
       candles: [],
       trades: [],
       equityCurve: [],
-      calculatedTimeframe: null
+      calculatedTimeframe: null,
+      showEquityCurve: false
     }
   },
   computed: {
@@ -167,10 +171,16 @@ export default {
     }
   },
   mounted () {
+    this.showEquityCurve = this.equityCurveIsVisible
   },
   methods: {
+    closestCandleByTime (timestamp) {
+      return this.candles.reduce((prev, curr) => (Math.abs(curr.time - timestamp) < Math.abs(prev.time - timestamp)) ? curr : prev)
+    },
     scrollToTime (time) {
-      this.$refs.tradesChart.scrollTo(time)
+      const closestCandle = this.closestCandleByTime(time / 1000).time * 1000
+
+      this.$refs.tradesChart.scrollTo(closestCandle)
     }
   },
   head () {

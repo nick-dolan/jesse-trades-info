@@ -46,14 +46,14 @@ router.get('/candles', function (req, res) {
     .then((result) => {
       const supportedTimeframes = [1, 3, 5, 15, 30, 60, 120, 180, 240, 360, 480, 1440]
       const candlesLength = result.rows.length
-      const goal = 15000
+      const goal = 10000
       let calculatedFrame = 60
 
       if (selectedTimeframe) {
         calculatedFrame = selectedTimeframe
       }
       else {
-        // Calculate
+        // Calculate recommended minimum timeframe
         let current = null
 
         for (let i = 0; i < supportedTimeframes.length; i++) {
