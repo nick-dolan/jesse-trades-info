@@ -20,6 +20,13 @@ npm run build
 npm run start
 ```
 
+### Docker
+
+```
+docker pull jessetradesinfo/jesse-trades-info:v0.1.0
+docker run -p 3000:3000 jessetradesinfo/jesse-trades-info:v0.1.0
+```
+
 After a successful start, you can open it at http://localhost:3000/.
 
 See the installation process video [here](https://vimeo.com/440370244). If you have any questions or feature requests, you may ask it [here](https://forum.jesse.trade/d/127-jesse-trades-info-tool-to-review-backtest-results).
