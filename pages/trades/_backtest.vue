@@ -19,16 +19,19 @@
       </client-only>
     </template>
 
-    <div class="d-flex justify-content-between align-items-center">
+    <div
+      v-if="candles.length > 0"
+      class="d-flex justify-content-between align-items-center">
       <h2>
         Trades
       </h2>
 
-      <StickyChartSwitcher/>
+      <StickyChartSwitcher v-if="candles.length > 0"/>
     </div>
 
     <client-only>
       <div
+        v-if="calculatedTimeframe && candles.length > 0"
         :class="{ 'is-sticky': isStickyChart }"
         class="chart-wrapper d-flex mb-20">
         <small class="trades-candles-length">Number of candles: {{ candles.length }}</small>
@@ -94,7 +97,7 @@ export default {
     // Candles
     //
     let candles = []
-    let calculatedTimeframe = null
+    let calculatedTimeframe = 0
 
     if (trades.length > 0) {
       await $axios
@@ -109,6 +112,9 @@ export default {
         .then((result) => {
           calculatedTimeframe = result.calculatedFrame
           candles = result.data
+        })
+        .catch((err) => {
+          console.log(err.message)
         })
     }
 
@@ -157,7 +163,7 @@ export default {
       candles: [],
       trades: [],
       equityCurve: [],
-      calculatedTimeframe: null,
+      calculatedTimeframe: 0,
       showEquityCurve: false
     }
   },

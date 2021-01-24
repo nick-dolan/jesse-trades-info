@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { Pool } = require('pg')
+const { Client } = require('pg')
 const { batchCandleJSON } = require('candlestick-convert')
 const dayjs = require('dayjs')
 const consola = require('consola')
@@ -9,15 +9,22 @@ dayjs.extend(utc)
 
 const router = Router()
 
-const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT
-})
+router.get('/candles', (req, res) => {
+  const client = new Client({
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT
+  })
 
-router.get('/candles', function (req, res) {
+  client
+    .connect()
+    .then(() => consola.success('Database connected!'))
+    .catch((err) => {
+      consola.error('Connection error:', err.message)
+    })
+
   const {
     symbol,
     exchange,
@@ -38,7 +45,7 @@ router.get('/candles', function (req, res) {
     .add(2, 'hour')
     .unix() * 1000
 
-  pool
+  client
     .query(`SELECT timestamp as time,open,high,low,close,volume
             FROM candle
             WHERE symbol='${symbol}'
@@ -79,14 +86,14 @@ router.get('/candles', function (req, res) {
 
         return item
       })
-
+      client.end()
       res.json({
         calculatedFrame,
         data: candles
       })
     })
     .catch((err) => {
-      consola.error(err)
+      client.end()
       res.status(500).json(err.stack)
     })
 })
