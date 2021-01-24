@@ -48,6 +48,11 @@ export default {
   data () {
     return {}
   },
+  head () {
+    return {
+      title: 'JTI :: Settings'
+    }
+  },
   computed: {
     ...mapState({
       allowAllTimeframes: state => state.settings.allowAllTimeframes,
@@ -77,11 +82,6 @@ export default {
       setAllowAllTimeframes: 'settings/setAllowAllTimeframes',
       setEquityCurveIsVisible: 'settings/setEquityCurveIsVisible'
     })
-  },
-  head () {
-    return {
-      title: 'JTI :: Settings'
-    }
   }
 }
 </script>

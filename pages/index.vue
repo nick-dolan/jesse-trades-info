@@ -22,9 +22,6 @@ export default {
   data () {
     return {}
   },
-  mounted () {
-  },
-  methods: {},
   head () {
     return {
       title: 'JTI :: Home',
@@ -32,6 +29,9 @@ export default {
         { hid: 'description', name: 'description', content: 'List of backtests' }
       ]
     }
-  }
+  },
+  mounted () {
+  },
+  methods: {}
 }
 </script>

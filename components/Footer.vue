@@ -30,20 +30,6 @@
   </footer>
 </template>
 
-<style scoped lang="scss">
-.footer {
-  height: 50px;
-  background-color: var(--bg-secondary-color);
-  font-size: 14px;
-  .container {
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-}
-</style>
-
 <script>
 import githubIcon from '@/static/svg/github.svg'
 
@@ -61,3 +47,18 @@ export default {
   methods: {}
 }
 </script>
+
+<style scoped lang="scss">
+  .footer {
+    height: 50px;
+    background-color: var(--bg-secondary-color);
+    font-size: 14px;
+
+    .container {
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+</style>

@@ -45,19 +45,6 @@
   </section>
 </template>
 
-<style scoped lang="scss">
-  .remove-item {
-    display: flex;
-    align-items: center;
-    svg {
-      color: var(--color-grey);
-      &:hover {
-        color: var(--color-error);
-      }
-    }
-  }
-</style>
-
 <script>
 import { mapState } from 'vuex'
 import minusSquare from '@/static/svg/minus-square.svg'
@@ -84,3 +71,18 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+  .remove-item {
+    display: flex;
+    align-items: center;
+
+    svg {
+      color: var(--color-grey);
+
+      &:hover {
+        color: var(--color-error);
+      }
+    }
+  }
+</style>

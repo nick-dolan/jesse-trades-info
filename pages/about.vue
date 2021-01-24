@@ -47,15 +47,15 @@ export default {
   data () {
     return {}
   },
-  computed: {},
-  mounted () {
-  },
-  methods: {},
   head () {
     return {
       title: 'JTI :: About'
     }
-  }
+  },
+  computed: {},
+  mounted () {
+  },
+  methods: {}
 }
 </script>
 

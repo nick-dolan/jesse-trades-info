@@ -2,6 +2,7 @@ const { Router } = require('express')
 const { Pool } = require('pg')
 const { batchCandleJSON } = require('candlestick-convert')
 const dayjs = require('dayjs')
+const consola = require('consola')
 
 const utc = require('dayjs/plugin/utc')
 dayjs.extend(utc)
@@ -84,9 +85,10 @@ router.get('/candles', function (req, res) {
         data: candles
       })
     })
-    .catch(err =>
+    .catch((err) => {
+      consola.error(err)
       res.status(500).json(err.stack)
-    )
+    })
 })
 
 module.exports = router

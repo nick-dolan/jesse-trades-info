@@ -34,11 +34,12 @@
     "vuex-persistedstate": "^4.0.0-beta.3"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config": "^3.1.0",
-    "@nuxtjs/eslint-module": "^2.0.0",
+    "@nuxt/types": "^2.14.12",
+    "@nuxtjs/eslint-config": "^5.0.0",
+    "@nuxtjs/eslint-module": "^3.0.2",
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.12.1",
-    "eslint-plugin-nuxt": "^1.0.0",
+    "eslint": "^7.18.0",
+    "eslint-plugin-nuxt": "^2.0.0",
     "node-sass": "^5.0.0",
     "sass-loader": "^10.1.1"
   }

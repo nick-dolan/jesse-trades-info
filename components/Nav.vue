@@ -24,23 +24,6 @@
   </div>
 </template>
 
-<style lang="scss">
-  .nav {
-    margin-bottom: 16px;
-    .nav-right {
-      align-items: center;
-      font-size: 14px;
-      color: var(--color-darkGrey);
-      font-family: var(--font-family-mono);
-    }
-  }
-  .tabs {
-    .tabs-toggler {
-      padding: 2px;
-    }
-  }
-</style>
-
 <script>
 
 export default {
@@ -57,3 +40,20 @@ export default {
   methods: {}
 }
 </script>
+
+<style lang="scss">
+  .nav {
+    margin-bottom: 16px;
+    .nav-right {
+      align-items: center;
+      font-size: 14px;
+      color: var(--color-darkGrey);
+      font-family: var(--font-family-mono);
+    }
+  }
+  .tabs {
+    .tabs-toggler {
+      padding: 2px;
+    }
+  }
+</style>

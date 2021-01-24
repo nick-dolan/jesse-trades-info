@@ -161,6 +161,11 @@ export default {
       showEquityCurve: false
     }
   },
+  head () {
+    return {
+      title: `JTI :: ${this.backtestName.charAt(0).toUpperCase() + this.backtestName.slice(1)}`
+    }
+  },
   computed: {
     ...mapState({
       isStickyChart: state => state.settings.isStickyChart,
@@ -181,11 +186,6 @@ export default {
       const closestCandle = this.closestCandleByTime(time / 1000).time * 1000
 
       this.$refs.tradesChart.scrollTo(closestCandle)
-    }
-  },
-  head () {
-    return {
-      title: `JTI :: ${this.backtestName.charAt(0).toUpperCase() + this.backtestName.slice(1)}`
     }
   }
 }
