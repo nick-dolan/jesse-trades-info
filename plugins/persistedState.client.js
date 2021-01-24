@@ -18,8 +18,14 @@ export default ({ store, req }) => {
         }
       },
       // Please see https://github.com/js-cookie/js-cookie#json, on how to handle JSON.
-      setItem: (key, value) => Cookies.set(key, value, { expires: 365, secure: false }),
-      removeItem: key => Cookies.remove(key)
+      setItem: (key, value) => Cookies.set(key, value, {
+        expires: 365,
+        secure: false,
+        sameSite: 'lax'
+      }),
+      removeItem: key => Cookies.remove(key, {
+        sameSite: 'lax'
+      })
     }
   })(store)
 }
