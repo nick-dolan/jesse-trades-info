@@ -70,18 +70,13 @@ export default {
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module'
   ],
+
   /*
   ** Nuxt.js modules
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    ['nuxt-env', {
-      keys: [
-        { key: 'DB_HOST', name: '127.0.0.1' },
-        { key: 'DB_PORT', name: '5432' }
-      ]
-    }],
     'nuxt-svg-loader'
   ],
   /*
