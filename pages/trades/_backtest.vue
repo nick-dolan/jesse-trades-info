@@ -52,6 +52,7 @@
 
     <TradesList
       :trades="trades"
+      :ohlc="candles"
       :is-sticky="isStickyChart"
       @get-order-time="scrollToTime"/>
   </section>
@@ -77,7 +78,10 @@ export default {
     RangeSwitcher,
     StickyChartSwitcher
   },
-  async asyncData ({ $axios, route }) {
+  async asyncData ({
+    $axios,
+    route
+  }) {
     //
     // Trades
     //

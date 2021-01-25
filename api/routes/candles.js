@@ -22,7 +22,7 @@ router.get('/candles', (req, res) => {
     .connect()
     .then(() => consola.success('Database connected!'))
     .catch((err) => {
-      consola.error('Connection error:', err.message)
+      consola.error('Database connection error:', err.message)
     })
 
   const {

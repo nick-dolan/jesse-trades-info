@@ -92,7 +92,7 @@
 
               <table
                 class="table table-orders table-hover mb-10">
-                <thead :class="{ 'table-orders-sticky-row': !isTableOverflown && isSticky }">
+                <thead :class="{ 'table-orders-sticky-row': !isTableOverflown && isSticky && ohlc.length > 0 }">
                   <tr>
                     <th>Symbol</th>
                     <th>Exchange</th>
@@ -184,6 +184,11 @@ export default {
       required: true,
       default: () => []
     },
+    ohlc: {
+      type: Array,
+      default: () => [],
+      required: true
+    },
     isSticky: {
       type: Boolean,
       default: true
@@ -218,7 +223,9 @@ export default {
       this.selectedOrder = index
     },
     getOrderTime (executedAt) {
-      this.$emit('get-order-time', executedAt)
+      if (this.ohlc.length) {
+        this.$emit('get-order-time', executedAt)
+      }
     },
     deleteBacktest (fileName) {
       this.$store.dispatch('files/removeFile', fileName)
