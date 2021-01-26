@@ -24,7 +24,7 @@
     <div class="form-check form-switch ml-5">
       <label
         class="form-check-label user-select-none text-grey"
-        for="equity_curve_visibility_switch">Equity Curve chart is visible</label>
+        for="equity_curve_visibility_switch">Show Equity Curve chart</label>
 
       <input
         id="equity_curve_visibility_switch"

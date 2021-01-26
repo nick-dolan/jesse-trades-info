@@ -25,6 +25,9 @@ export default {
   */
   head: {
     title: process.env.npm_package_name || '',
+    htmlAttrs: {
+      'data-theme': 'light'
+    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -71,13 +74,20 @@ export default {
     '@nuxtjs/eslint-module'
   ],
 
+  router: {
+    middleware: [
+      'middleware'
+    ]
+  },
+
   /*
   ** Nuxt.js modules
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    'nuxt-svg-loader'
+    'nuxt-svg-loader',
+    'cookie-universal-nuxt'
   ],
   /*
   ** Axios module configuration

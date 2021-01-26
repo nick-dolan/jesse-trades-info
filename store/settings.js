@@ -1,10 +1,11 @@
-export const state = () => ({
+const state = () => ({
   allowAllTimeframes: false,
   isStickyChart: true,
-  equityCurveIsVisible: true
+  equityCurveIsVisible: true,
+  theme: 'light' // light or dark
 })
 
-export const mutations = {
+const mutations = {
   SET_ALLOW_ALL_TIMEFRAMES (state, payload) {
     state.allowAllTimeframes = payload
   },
@@ -13,10 +14,17 @@ export const mutations = {
   },
   SET_EQUITY_CURVE_IS_VISIBLE (state, payload) {
     state.equityCurveIsVisible = payload
+  },
+  SET_THEME (state, payload) {
+    state.theme = payload
   }
 }
 
-export const actions = {
+const getters = {
+  theme: state => state.theme
+}
+
+const actions = {
   setAllowAllTimeframes ({ commit }, payload) {
     commit('SET_ALLOW_ALL_TIMEFRAMES', payload)
   },
@@ -25,5 +33,16 @@ export const actions = {
   },
   setEquityCurveIsVisible ({ commit }, payload) {
     commit('SET_EQUITY_CURVE_IS_VISIBLE', payload)
+  },
+  setTheme ({ commit }, payload) {
+    commit('SET_THEME', payload)
   }
+}
+
+export default {
+  namespaced: true,
+  state,
+  getters,
+  actions,
+  mutations
 }

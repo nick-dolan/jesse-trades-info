@@ -17,19 +17,22 @@
         </div>
       </div>
 
-      <div class="nav-right">
-        Jesse trades info
+      <div class="nav-right hide-xs">
+        <span class="mr-20">Jesse trades info</span>
+
+        <ThemeSwitch/>
       </div>
     </nav>
   </div>
 </template>
 
 <script>
+import ThemeSwitch from '@/components/ThemeSwitch'
 
 export default {
   name: 'Nav',
   components: {
-    // ThemeSwitch
+    ThemeSwitch
   },
   data () {
     return {}
