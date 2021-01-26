@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'EquityCurveChart',
   components: {},
@@ -17,13 +19,11 @@ export default {
   },
   data () {
     return {
+      chart: null,
+      lineSeries: null,
       settings: {
         width: 800,
         height: 300,
-        layout: {
-          backgroundColor: '#ffffff',
-          textColor: 'rgba(33, 56, 77, 1)'
-        },
         priceScale: {
           borderColor: 'rgba(197, 203, 206, 1)'
         },
@@ -32,24 +32,86 @@ export default {
           timeVisible: true,
           secondsVisible: false
         }
+      },
+      lightTheme: {
+        chart: {
+          layout: {
+            backgroundColor: '#ffffff',
+            textColor: 'rgba(33, 56, 77, 1)'
+          },
+          grid: {
+            vertLines: {
+              color: '#d6dcde'
+            },
+            horzLines: {
+              color: '#d6dcde'
+            }
+          }
+        },
+        series: {
+          color: '#5a67d8'
+        }
+      },
+      darkTheme: {
+        chart: {
+          layout: {
+            backgroundColor: '#131722',
+            textColor: '#d1d4dc'
+          },
+          grid: {
+            vertLines: {
+              color: 'rgba(42, 46, 57, 0.6)'
+            },
+            horzLines: {
+              color: 'rgba(42, 46, 57, 0.6)'
+            }
+          },
+          priceScale: {
+            borderColor: 'rgba(197, 203, 206, 0.6)'
+          },
+          timeScale: {
+            borderColor: 'rgba(197, 203, 206, 0.6)',
+            timeVisible: true,
+            secondsVisible: false
+          }
+        },
+        series: {
+          color: '#f9b537'
+        }
       }
     }
   },
-  computed: {},
+  computed: {
+    ...mapGetters({
+      theme: 'settings/theme'
+    })
+  },
+  watch: {
+    theme () {
+      this.syncToTheme()
+    }
+  },
   mounted () {
     this.$set(this.settings, 'width', this.$refs.chart.clientWidth)
-
-    const chart = LightweightCharts.createChart(this.$refs.chart, this.settings)
-
-    const lineSeries = chart.addLineSeries({
-      lineWidth: 1.5,
-      color: '#5a67d8'
+    this.chart = LightweightCharts.createChart(this.$refs.chart, this.settings)
+    this.lineSeries = this.chart.addLineSeries({
+      lineWidth: 1.5
     })
 
-    chart.timeScale().fitContent()
-
-    lineSeries.setData(this.equityCurve)
+    this.chart.timeScale().fitContent()
+    this.lineSeries.setData(this.equityCurve)
+    this.syncToTheme()
   },
-  methods: {}
+  methods: {
+    syncToTheme () {
+      const themesData = {
+        dark: this.darkTheme,
+        light: this.lightTheme
+      }
+
+      this.chart.applyOptions(themesData[this.theme].chart)
+      this.lineSeries.applyOptions(themesData[this.theme].series)
+    }
+  }
 }
 </script>
