@@ -10,7 +10,7 @@
     </h1>
 
     <template v-if="showEquityCurve">
-      <h2>Equity Curve</h2>
+      <h2 class="text-primary">Equity Curve</h2>
 
       <client-only>
         <EquityCurveChart
@@ -22,7 +22,7 @@
     <div
       v-if="candles.length > 0"
       class="d-flex justify-content-between align-items-center">
-      <h2>
+      <h2 class="text-primary">
         Trades
       </h2>
 

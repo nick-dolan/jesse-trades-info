@@ -3,7 +3,7 @@
     ref="tableWrapper"
     :class="{ 'table-wrapper': isTableOverflown }"
     class="mb-40">
-    <h2>Roundtrips</h2>
+    <h2 class="text-primary">Roundtrips</h2>
 
     <table class="table table-roundtrips table-hover">
       <thead>
