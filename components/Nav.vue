@@ -20,7 +20,9 @@
       <div class="nav-right hide-xs">
         <span class="mr-20 brand-name">Jesse trades info</span>
 
-        <ThemeSwitch/>
+        <client-only>
+          <ThemeSwitch/>
+        </client-only>
       </div>
     </nav>
   </div>
