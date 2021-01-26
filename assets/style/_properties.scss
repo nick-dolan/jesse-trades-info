@@ -3,11 +3,15 @@
   --sell-color: rgba(247, 30, 50, 0.2);
   --buy-color: rgba(0, 193, 0, 0.2);
   --font-size: 16px;
+  --color-nav-link: var(--color-darkGrey);
+  --color-nav-link-border: var(--color-darkGrey);
 }
 [data-theme="dark"] {
-  --bg-color: #000;
-  --bg-secondary-color: #131316;
-  --font-color: #f5f5f5;
+  --bg-color: #111c2a;
+  --color-primary: #f9b537;
+  --bg-secondary-color: #0d1620;
+  --font-color: #f6f7ee;
   --color-grey: #ccc;
-  --color-darkGrey: #777;
+  --color-nav-link: var(--font-color);
+  --color-nav-link-border: #2d4562;
 }

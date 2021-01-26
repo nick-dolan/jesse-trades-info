@@ -18,7 +18,7 @@
       </div>
 
       <div class="nav-right hide-xs">
-        <span class="mr-20">Jesse trades info</span>
+        <span class="mr-20 brand-name">Jesse trades info</span>
 
         <ThemeSwitch/>
       </div>
@@ -44,7 +44,12 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+  .nav a,
+  .nav .brand {
+    color: var(--color-nav-link);
+  }
+
   .nav {
     margin-bottom: 16px;
     .nav-right {
@@ -53,10 +58,19 @@ export default {
       color: var(--color-darkGrey);
       font-family: var(--font-family-mono);
     }
+    .brand-name {
+      color: var(--font-color);
+    }
   }
+
   .tabs {
     .tabs-toggler {
       padding: 2px;
     }
+  }
+  .tabs > a.active,
+  .tabs > a:hover {
+    opacity: 1;
+    border-bottom: 2px solid var(--color-nav-link-border);
   }
 </style>
