@@ -6,7 +6,7 @@
           class="brand"
           to="/">
           <img
-            src="/svg/jesse-bot-logo.svg"
+            :src="`/svg/jesse-bot-logo-${theme}.svg`"
             alt="Jesse Bot">
         </nuxt-link>
 
@@ -30,6 +30,7 @@
 
 <script>
 import ThemeSwitch from '@/components/ThemeSwitch'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Nav',
@@ -39,7 +40,11 @@ export default {
   data () {
     return {}
   },
-  computed: {},
+  computed: {
+    ...mapGetters({
+      theme: 'settings/theme'
+    })
+  },
   mounted () {
   },
   methods: {}
