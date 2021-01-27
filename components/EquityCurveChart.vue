@@ -128,17 +128,17 @@ export default {
       this.lineSeries.applyOptions(themesData[this.theme].series)
     },
     handleCrosshairMove (param) {
-      if (!param.point) {
-        return
-      }
+      // if (!param.point) {
+      //   return
+      // }
 
-      const info = find(this.trades, (item) => {
-        return item.closed_at / 1000 === param.time
-      })
-
-      if (info !== undefined) {
-        console.log(info)
-      }
+      // const info = find(this.trades, (item) => {
+      //   return item.closed_at / 1000 === param.time
+      // })
+      //
+      // if (info !== undefined) {
+      //   console.log(info)
+      // }
     },
     handleClick (param) {
       if (!param.point) {
@@ -150,7 +150,13 @@ export default {
       })
 
       if (info !== undefined) {
-        console.log(info)
+        const element = document.getElementById(info.id)
+
+        if (element) {
+          const yOffset = -395
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
+          window.scrollTo({ top: y, behavior: 'smooth' })
+        }
       }
     }
   }

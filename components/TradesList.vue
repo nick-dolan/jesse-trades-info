@@ -25,6 +25,7 @@
       <tbody>
         <template v-for="(item, i) in trades">
           <tr
+            :id="item.id"
             :key="i"
             class="is-pointer"
             :class="{ 'is-active': rowVisibility.index === i && rowVisibility.visible }"
