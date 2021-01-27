@@ -1,11 +1,14 @@
 <template>
-  <div
-    id="chart"
-    ref="chart"/>
+  <div class="position-relative">
+    <div
+      id="chart"
+      ref="chart"/>
+  </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import { find } from 'lodash'
 
 export default {
   name: 'EquityCurveChart',
@@ -13,8 +16,13 @@ export default {
   props: {
     equityCurve: {
       type: Array,
-      default: () => [],
-      required: true
+      required: true,
+      default: () => []
+    },
+    trades: {
+      type: Array,
+      required: true,
+      default: () => []
     }
   },
   data () {
@@ -101,6 +109,13 @@ export default {
     this.chart.timeScale().fitContent()
     this.lineSeries.setData(this.equityCurve)
     this.syncToTheme()
+
+    this.chart.subscribeClick(this.handleClick)
+    this.chart.subscribeCrosshairMove(this.handleCrosshairMove)
+  },
+  beforeDestroy () {
+    this.chart.unsubscribeClick(this.handleClick)
+    this.chart.unsubscribeCrosshairMove(this.handleCrosshairMove)
   },
   methods: {
     syncToTheme () {
@@ -111,6 +126,32 @@ export default {
 
       this.chart.applyOptions(themesData[this.theme].chart)
       this.lineSeries.applyOptions(themesData[this.theme].series)
+    },
+    handleCrosshairMove (param) {
+      if (!param.point) {
+        return
+      }
+
+      const info = find(this.trades, (item) => {
+        return item.closed_at / 1000 === param.time
+      })
+
+      if (info !== undefined) {
+        console.log(info)
+      }
+    },
+    handleClick (param) {
+      if (!param.point) {
+        return
+      }
+
+      const info = find(this.trades, (item) => {
+        return item.closed_at / 1000 === param.time
+      })
+
+      if (info !== undefined) {
+        console.log(info)
+      }
     }
   }
 }

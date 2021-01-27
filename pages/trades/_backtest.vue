@@ -15,6 +15,7 @@
       <client-only>
         <EquityCurveChart
           class="mb-20"
+          :trades="trades"
           :equity-curve="equityCurve"/>
       </client-only>
     </template>
@@ -123,7 +124,7 @@ export default {
     }
 
     //
-    // Balance line
+    // Equity Curve (Balance line)
     //
     let balance = 10000
     let equityCurve = []
