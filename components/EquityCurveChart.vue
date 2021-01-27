@@ -156,6 +156,12 @@ export default {
           const yOffset = -395
           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
           window.scrollTo({ top: y, behavior: 'smooth' })
+
+          element.classList.add('highlight')
+
+          setTimeout(() => {
+            element.classList.remove('highlight')
+          }, 1510)
         }
       }
     }

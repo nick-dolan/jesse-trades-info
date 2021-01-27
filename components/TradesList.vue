@@ -241,7 +241,27 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
+  @keyframes quickFlash {
+    0% {
+      background: var(--color-primary);
+    }
+    100% {
+      background: transparent;
+    }
+  }
+
+  .highlight {
+    -webkit-animation-name: quickFlash;
+    -webkit-animation-duration: 1500ms;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease;
+    -moz-animation-name: quickFlash;
+    -moz-animation-duration: 1500ms;
+    -moz-animation-iteration-count: 1;
+    -moz-animation-timing-function: ease;
+  }
+
   .remove-item {
     display: flex;
     align-items: center;
