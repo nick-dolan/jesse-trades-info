@@ -21,7 +21,9 @@ const mutations = {
 }
 
 const getters = {
-  theme: state => state.theme
+  theme: state => state.theme,
+  isStickyChart: state => state.isStickyChart,
+  equityCurveIsVisible: state => state.equityCurveIsVisible
 }
 
 const actions = {

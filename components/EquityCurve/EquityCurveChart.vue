@@ -3,16 +3,41 @@
     <div
       id="chart"
       ref="chart"/>
+
+    <EquityCurveTooltip :settings="tooltipSettings"/>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import { find } from 'lodash'
+import EquityCurveTooltip from '@/components/EquityCurve/EquityCurveTooltip'
+
+const getDefaultTooltipState = () => {
+  return {
+    data: {
+      closed_at: null,
+      PNL_percentage: null,
+      holding_period: null,
+      type: null,
+      symbol: null,
+      strategy_name: null,
+      exchange: null,
+      orders: null
+    },
+    height: 110,
+    width: 135,
+    margin: 15,
+    left: null,
+    top: null
+  }
+}
 
 export default {
   name: 'EquityCurveChart',
-  components: {},
+  components: {
+    EquityCurveTooltip
+  },
   props: {
     equityCurve: {
       type: Array,
@@ -29,6 +54,8 @@ export default {
     return {
       chart: null,
       lineSeries: null,
+      isTooltipVisible: false,
+      tooltipSettings: getDefaultTooltipState(),
       settings: {
         width: 800,
         height: 300,
@@ -99,7 +126,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      theme: 'settings/theme'
+      theme: 'settings/theme',
+      isStickyChart: 'settings/isStickyChart'
     })
   },
   watch: {
@@ -136,17 +164,48 @@ export default {
       this.lineSeries.applyOptions(themesData[this.theme].series)
     },
     handleCrosshairMove (param) {
-      // if (!param.point) {
-      //   return
-      // }
+      const el = this.$refs.chart
 
-      // const info = find(this.trades, (item) => {
-      //   return item.closed_at / 1000 === param.time
-      // })
-      //
-      // if (info !== undefined) {
-      //   console.log(info)
-      // }
+      if (param.point === undefined || !param.time || param.point.x < 0 || param.point.x > el.clientWidth || param.point.y < 0 || param.point.y > el.clientHeight) {
+        this.tooltipSettings = getDefaultTooltipState()
+      }
+      else {
+        const data = find(this.trades, (item) => {
+          return item.closed_at / 1000 === param.time
+        })
+
+        if (data !== undefined) {
+          this.$set(this.tooltipSettings, 'data', {
+            closed_at: data.closed_at,
+            PNL_percentage: data.PNL_percentage,
+            holding_period: data.holding_period,
+            type: data.type,
+            symbol: data.symbol,
+            strategy_name: data.strategy_name,
+            exchange: data.exchange,
+            orders: data.orders.length
+          })
+
+          const price = param.seriesPrices.get(this.lineSeries)
+          const coordinate = this.lineSeries.priceToCoordinate(price)
+
+          let shiftedCoordinate = param.point.x - this.tooltipSettings.width / 2
+
+          if (coordinate === null) {
+            return
+          }
+
+          const width = this.tooltipSettings.width
+          const height = this.tooltipSettings.height
+          const margin = this.tooltipSettings.margin
+
+          shiftedCoordinate = Math.max(0, Math.min(el.clientWidth - width, shiftedCoordinate))
+          const coordinateY = coordinate - height - margin > 0 ? coordinate - height - margin : Math.max(0, Math.min(el.clientHeight - height - margin, coordinate + margin))
+
+          this.$set(this.tooltipSettings, 'left', shiftedCoordinate)
+          this.$set(this.tooltipSettings, 'top', coordinateY)
+        }
+      }
     },
     handleClick (param) {
       if (!param.point) {
@@ -161,10 +220,11 @@ export default {
         const element = document.getElementById(info.id)
 
         if (element) {
-          const yOffset = -395
+          const yOffset = this.isStickyChart ? -395 : -20
+          console.log(yOffset, this.isStickyChart)
           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
-          window.scrollTo({ top: y, behavior: 'smooth' })
 
+          window.scrollTo({ top: y, behavior: 'smooth' })
           element.classList.add('highlight')
 
           setTimeout(() => {
@@ -176,3 +236,4 @@ export default {
   }
 }
 </script>
+
