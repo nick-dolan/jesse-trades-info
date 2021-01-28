@@ -64,7 +64,7 @@
 import OHLC from '@/components/OHLC'
 import TradesList from '@/components/TradesList'
 import Uploader from '@/components/Uploader'
-import EquityCurveChart from '@/components/EquityCurveChart'
+import EquityCurveChart from '@/components/EquityCurve/EquityCurveChart'
 import RangeSwitcher from '@/components/RangeSwitcher'
 import StickyChartSwitcher from '@/components/StickyChartSwitcher'
 import { mapState } from 'vuex'

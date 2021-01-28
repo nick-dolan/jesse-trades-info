@@ -54,6 +54,14 @@ export default {
             horzLines: {
               color: '#d6dcde'
             }
+          },
+          priceScale: {
+            borderColor: '#868b8c'
+          },
+          timeScale: {
+            borderColor: '#868b8c',
+            timeVisible: true,
+            secondsVisible: false
           }
         },
         series: {
@@ -63,7 +71,7 @@ export default {
       darkTheme: {
         chart: {
           layout: {
-            backgroundColor: '#131722',
+            backgroundColor: '#111c2a',
             textColor: '#d1d4dc'
           },
           grid: {
