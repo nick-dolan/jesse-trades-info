@@ -14,14 +14,14 @@ export const mutations = {
 export const actions = {
   async getFilesList ({ commit }) {
     await this.$axios
-      .$get('/api/files-list')
+      .$get(`${process.env.baseUrl}/api/files-list`)
       .then((result) => {
         commit('SET_BACKTESTS_FILE_NAMES', result)
       })
   },
   async removeFile ({ state, commit }, fileName) {
     await this.$axios
-      .$delete('/api/delete-file', {
+      .$delete(`${process.env.baseUrl}/api/delete-file`, {
         params: {
           file_name: fileName
         }

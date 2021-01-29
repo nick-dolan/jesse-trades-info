@@ -131,5 +131,4 @@ export default {
     border: 1px solid var(--color-primary);
     border-radius: 2px;
   }
-
 </style>

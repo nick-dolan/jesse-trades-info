@@ -55,7 +55,10 @@ export default {
   computed: {
     ...mapState({
       allowAllTimeframes: state => state.settings.allowAllTimeframes
-    })
+    }),
+    baseUrl () {
+      return process.env.baseUrl
+    }
   },
   mounted () {
   },
@@ -66,7 +69,7 @@ export default {
         this.loading = true
 
         await this.$axios
-          .$get('/api/candles', {
+          .$get(`${this.baseUrl}/api/candles`, {
             params: {
               symbol: this.trades[0].symbol,
               exchange: this.trades[0].exchange,

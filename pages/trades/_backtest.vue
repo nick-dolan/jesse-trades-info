@@ -81,7 +81,8 @@ export default {
   },
   async asyncData ({
     $axios,
-    route
+    route,
+    env
   }) {
     //
     // Trades
@@ -89,7 +90,7 @@ export default {
     let trades = []
 
     await $axios
-      .$get('/api/read-file', {
+      .$get(`${env.baseUrl}/api/read-file`, {
         params: {
           fileName: route.params.backtest
         }
@@ -106,7 +107,7 @@ export default {
 
     if (trades.length > 0) {
       await $axios
-        .$get('/api/candles', {
+        .$get(`${env.baseUrl}/api/candles`, {
           params: {
             symbol: trades[0].symbol,
             exchange: trades[0].exchange,

@@ -6,6 +6,12 @@ export default {
   ** See https://nuxtjs.org/api/configuration-mode
   */
   ssr: true,
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000'
+  },
+  server: {
+    host: process.env.NUXT_HOST
+  },
   vue: {
     config: {
       productionTip: false

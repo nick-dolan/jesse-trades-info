@@ -4,7 +4,6 @@
       <h1>
         Jesse trades info
       </h1>
-
       <a
         class="text-dark"
         title="Source Code of jesse-trades-info"

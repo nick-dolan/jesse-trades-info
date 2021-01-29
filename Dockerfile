@@ -1,7 +1,8 @@
 FROM node:14.15.3
 
-ENV NUXT_HOST=0.0.0.0
-ENV NUXT_PORT=3000
+ENV BASE_URL=http://172.17.0.2:4000
+ENV HOST=0.0.0.0
+ENV PORT=3000
 
 RUN mkdir -p /usr/src/nuxt-app
 WORKDIR /usr/src/nuxt-app

@@ -23,7 +23,11 @@ export default {
       file: {}
     }
   },
-  computed: {},
+  computed: {
+    baseUrl () {
+      return process.env.baseUrl
+    }
+  },
   watch: {
     file (value) {
       if (value !== undefined) {
@@ -50,7 +54,7 @@ export default {
       formData.append('backtest', this.file, this.file.name)
 
       this.$axios
-        .$post('/api/upload', formData)
+        .$post(`${this.baseUrl}/api/upload`, formData)
         .then((fileName) => {
           console.log(fileName)
 
