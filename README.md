@@ -1,8 +1,10 @@
-# Jesse trades info 
+# Jesse trades info
 
-Jesse trades info is the additional instrument for [Jesse](https://jesse.trade/)'s trading framework that helps to parse JSON backtest files with trades and shows in a convenient way with tables and charts.
+Jesse trades info is the additional instrument for [Jesse](https://jesse.trade/)'s trading framework that parses JSON back-test files with trades and shows conveniently with tables and charts.
 
-Firstly you need to set up a database. Rename `.env.example` into `.env` in the root directory with the same credentials as you are using with Jesse. It needed to get candles to draw a chart with trades.
+### Installation
+
+Firstly you need to set up a database. 🚨 Rename `.env.example` into `.env` in the root directory with the same credentials as you are using Jesse. It needed to get candles to draw a chart with trades.
 
 ```
 DB_HOST='127.0.0.1'
@@ -22,6 +24,14 @@ npm run start
 
 After a successful start, you can open it at http://localhost:3000/.
 
-See the installation process video [here](https://vimeo.com/440370244). If you have any questions or feature requests, you may ask it [here](https://forum.jesse.trade/d/127-jesse-trades-info-tool-to-review-backtest-results).
+See the installation process video [here](https://vimeo.com/440370244). If you have any questions or feature requests, you may ask them [here](https://forum.jesse.trade/d/127-jesse-trades-info-tool-to-review-backtest-results).
 
-![Watch the video](https://user-images.githubusercontent.com/25667028/95674071-82b84580-0bb6-11eb-8c36-c5417200b68c.png)
+#### Docker
+
+Read this [documentation](https://docs.jesse.trade/docs/getting-started/docker.html) to know how to launch it with docker.
+
+### Themes
+
+| Light         | Dark     |
+|:-------------:|:-------------:|
+| ![Ligth theme](https://user-images.githubusercontent.com/25667028/106305724-14cf8100-626e-11eb-9a86-3c24f5301719.png) | ![Dark theme](https://user-images.githubusercontent.com/25667028/106305809-34ff4000-626e-11eb-81b6-7ac4a43f576c.png) |
