@@ -1,3 +1,5 @@
+import { has } from 'lodash'
+
 // https://axios.nuxtjs.org/extend
 export default function ({ $axios }) {
   $axios.onRequest((config) => {
@@ -5,6 +7,8 @@ export default function ({ $axios }) {
   })
 
   $axios.onError((error) => {
-    console.log(error)
+    if (has(error, 'response.data.message')) {
+      console.log(error.response.data.message)
+    }
   })
 }
