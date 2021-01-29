@@ -221,7 +221,6 @@ export default {
 
         if (element) {
           const yOffset = this.isStickyChart ? -395 : -20
-          console.log(yOffset, this.isStickyChart)
           const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
 
           window.scrollTo({ top: y, behavior: 'smooth' })
