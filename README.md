@@ -34,4 +34,4 @@ Read this [documentation](https://docs.jesse.trade/docs/getting-started/docker.h
 
 | Light         | Dark     |
 |:-------------:|:-------------:|
-| ![Ligth theme](https://user-images.githubusercontent.com/25667028/106305724-14cf8100-626e-11eb-9a86-3c24f5301719.png) | ![Dark theme](https://user-images.githubusercontent.com/25667028/106305809-34ff4000-626e-11eb-81b6-7ac4a43f576c.png) |
+| ![Light theme](https://user-images.githubusercontent.com/25667028/106305724-14cf8100-626e-11eb-9a86-3c24f5301719.png) | ![Dark theme](https://user-images.githubusercontent.com/25667028/106305809-34ff4000-626e-11eb-81b6-7ac4a43f576c.png) |

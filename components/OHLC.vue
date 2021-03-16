@@ -86,9 +86,9 @@ export default {
 
     this.orders = this.orders.map((i) => {
       return {
-        time: i.executed_at / 1000,
+        time: i.__data__.executed_at / 1000,
         position: 'inBar',
-        color: i.side === 'buy' ? '#28bd14' : '#d43939',
+        color: i.__data__.side === 'buy' ? '#28bd14' : '#d43939',
         shape: 'circle',
         text: ''
       }

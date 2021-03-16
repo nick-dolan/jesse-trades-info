@@ -111,29 +111,29 @@
                 <tbody>
                   <tr
                     v-for="(order, index) in item.orders"
-                    :key="order.id"
+                    :key="order.__data__.id"
                     :class="{'selected-order': selectedOrder === index}"
                     class="is-pointer"
-                    @click="getOrderTime(order.executed_at); selectOrder(index)">
-                    <td>{{ order.symbol }}</td>
-                    <td>{{ order.exchange }}</td>
+                    @click="getOrderTime(order.__data__.executed_at); selectOrder(index)">
+                    <td>{{ order.__data__.symbol }}</td>
+                    <td>{{ order.__data__.exchange }}</td>
                     <td>
                       <div class="is-vertical-align">
                         <i
-                          :class="[order.side === 'sell' ? 'is-red' : 'is-green']"
+                          :class="[order.__data__.side === 'sell' ? 'is-red' : 'is-green']"
                           class="circle">&#9679;</i>
-                        <span class="text-capitalize ml-5">{{ order.side }}</span>
+                        <span class="text-capitalize ml-5">{{ order.__data__.side }}</span>
                       </div>
                     </td>
-                    <td>{{ order.role }}</td>
-                    <td>{{ order.type }}</td>
-                    <td><small>{{ order.qty | trailingZeros }}</small></td>
-                    <td><small>{{ order.price | trailingZeros }}</small></td>
-                    <td>{{ order.status }}</td>
-                    <td><small>{{ order.created_at | parseDate }}</small></td>
-                    <td><small>{{ order.executed_at | parseDate }}</small></td>
-                    <td :class="{ 'text-light': !order.canceled_at } ">
-                      {{ order.canceled_at ? order.canceled_at : '–' }}
+                    <td>{{ order.__data__.role }}</td>
+                    <td>{{ order.__data__.type }}</td>
+                    <td><small>{{ order.__data__.qty | trailingZeros }}</small></td>
+                    <td><small>{{ order.__data__.price | trailingZeros }}</small></td>
+                    <td>{{ order.__data__.status }}</td>
+                    <td><small>{{ order.__data__.created_at | parseDate }}</small></td>
+                    <td><small>{{ order.__data__.executed_at | parseDate }}</small></td>
+                    <td :class="{ 'text-light': !order.__data__.canceled_at } ">
+                      {{ order.__data__.canceled_at ? order.__data__.canceled_at : '–' }}
                     </td>
                   </tr>
                 </tbody>
